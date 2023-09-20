@@ -1,5 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+// import AppRoutes from './appRoutes';
 import './App.css';
 
 function App() {
