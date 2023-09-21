@@ -8,11 +8,11 @@ export interface ITask {
 }
 
 export interface IUrgentTask extends ITask {
-    endTime?: string;
+    endTime?: Date | null;
 }
 
 export interface ICompletedTask extends ITask  {
     review?: string;
     timeSpent?: string;
-    endTime?: string;
+    endTime?: Date | null;
 }
