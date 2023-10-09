@@ -1,15 +1,22 @@
-import React from 'react'
-import TodoList from './TodoList'
+
+import TodoTableContainer from '../tableComps/TodoTableContainer';
 import Add from "../generalComps/Add";
-import app from "../../App";
+import Header from "../generalComps/Header";
 
 export default function AppTodo() {
     return (
-        <div className='container'>
-            <h1 className='display-4'>Todo list app</h1>
-            {/*<SearchTask />*/}
-            <TodoList />
-            <Add />
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+            }}
+        >
+            <Header/>
+            <TodoTableContainer/>
+            <Add/>
         </div>
+
     )
 }
