@@ -22,13 +22,14 @@ import dayjs, {Dayjs} from 'dayjs';
 import utc from "dayjs/plugin/utc";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import ITask from "../../types/ITask";
+import useActionHook from "../../features/customHooks/useActionHook";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const TodoInput = () => {
     const {register, handleSubmit, formState: {errors}} = useForm();
-    const dispatch = useDispatch();
     const nav = useNavigate();
+    const {addTaskToStore}=useActionHook();
     dayjs.extend(utc);
 
     const [untilDate, setUntilDate] = React.useState<Dayjs | null>(
@@ -72,7 +73,8 @@ const TodoInput = () => {
             endTime: (isClosed || isUrgent) ? untilDate?.toISOString() : undefined,
         };
 
-        dispatch(addTask(newTask));
+        addTaskToStore(newTask);
+
         toast.success('Task added successfully !', {
             position: toast.POSITION.TOP_RIGHT
         });

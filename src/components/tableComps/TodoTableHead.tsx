@@ -9,7 +9,7 @@ const TodoTableHead = (props: IHeadProps) => {
             <TableRow>
                 {props.titles.map((category: string) => {
                     return <TableCell
-                        key={category} align="center">{category}
+                        key={category} align="center"> {category}
                     </TableCell>
                 })}
             </TableRow>
