@@ -5,6 +5,7 @@ import OpenTaskDialog from "../todoComps/OpenTaskDialog";
 export default function AddButton() {
 
     const [openForm, setOpenForm]=useState(false);
+
     return (
         <>
             <Button
@@ -16,7 +17,8 @@ export default function AddButton() {
                     left: "50%",
                     transform: "translateX(-50%)",
                     width: "100px",
-                    height: "50px"
+                    height: "50px",
+                    marginBottom: '10px', // Equal margin at the top and bottom
                 }}
                 onClick={() => {
                     setOpenForm(true);
@@ -24,7 +26,7 @@ export default function AddButton() {
                 aria-label="todoInput">
                 Create
             </Button>
-            {openForm &&  <OpenTaskDialog />}
+            {openForm &&  <OpenTaskDialog openForm={openForm} setOpenForm={setOpenForm}/>}
         </>
     )
 }

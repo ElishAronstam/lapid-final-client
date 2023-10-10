@@ -1,10 +1,10 @@
 import {
     Button,
-    Container,
     Dialog,
+    DialogActions,
     DialogContent,
     DialogTitle,
-    FormControl,
+    FormControl, FormGroup,
     InputLabel,
     MenuItem,
     Select,
@@ -23,9 +23,14 @@ import useActionHook from "../../features/customHooks/useActionHook";
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const OpenTaskDialog = () => {
+interface ITaskDialogProps{
+    openForm:boolean;
+    setOpenForm:(isOpen:boolean)=>void;
+}
 
-    const {register, handleSubmit, formState: {errors}} = useForm();
+const OpenTaskDialog = (props:ITaskDialogProps) => {
+
+    const {register, formState: {errors}} = useForm();
     const {addTaskToStore} = useActionHook();
     dayjs.extend(utc);
 
@@ -37,11 +42,37 @@ const OpenTaskDialog = () => {
     const [isUrgent, setIsUrgent] = useState(false);
     const [isClosed, setIsClosed] = useState(false);
 
-    const [openDialog, setOpenDialog] = useState(true);
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [estTime, setEstTime] = useState("");
+    const [review, setReview] = useState("");
+    const [timeSpent, setTimeSpent] = useState("");
+    //
+    // const [openDialog, setOpenDialog] = useState(true);
 
     const tasksCount = useSelector(selectItemCount);
 
-    const handlePriorityChange = (e: any) => {
+    const HandleTitle=(e:React.ChangeEvent<HTMLInputElement>)=>{
+        setTitle(e.target.value);
+    }
+
+    const HandleDescription=(e:React.ChangeEvent<HTMLInputElement>)=>{
+        setDescription(e.target.value);
+    }
+
+    const HandleEstTime=(e:React.ChangeEvent<HTMLInputElement>)=>{
+        setEstTime(e.target.value);
+    }
+
+    const HandleReview=(e:React.ChangeEvent<HTMLInputElement>)=>{
+        setReview(e.target.value);
+    }
+    const HandleTimeSpent=(e:React.ChangeEvent<HTMLInputElement>)=>{
+        setTimeSpent(e.target.value);
+    }
+
+
+    const HandlePriorityChange = (e:any) => {
         if (e.target.value == "High") {
             setIsUrgent(true);
         } else {
@@ -50,7 +81,7 @@ const OpenTaskDialog = () => {
         setPriority(e.target.value);
     }
 
-    const handleStatusChange = (e: any) => {
+    const HandleStatusChange = (e: any) => {
         const status = e.target.value;
         if (status == "Close") {
             setIsClosed(true);
@@ -59,16 +90,20 @@ const OpenTaskDialog = () => {
         setStatus(status);
     }
 
-    const onSubForm = async (bodyFormData: any) => {
+    const HandleCloseDialog = () => {
+        props.setOpenForm(false);
+    }
+
+    const HandleSubmit=()=>{
         const newTask: ITask = {
             id: (Number(tasksCount) + 1).toString(),
-            title: bodyFormData.title,
-            description: bodyFormData.description,
-            estimatedTime: bodyFormData.estimatedTime,
-            status: bodyFormData.status,
-            priority: bodyFormData.priority,
-            review: isClosed ? bodyFormData.review : undefined,
-            timeSpent: isClosed ? bodyFormData.timeSpent : undefined,
+            title:title,
+            description: description,
+            estimatedTime: estTime,
+            status: status,
+            priority: priority,
+            review: isClosed ? review : undefined,
+            timeSpent: isClosed ? timeSpent : undefined,
             endTime: (isClosed || isUrgent) ? untilDate?.toISOString() : undefined,
         };
 
@@ -80,15 +115,17 @@ const OpenTaskDialog = () => {
 
     }
 
+
+
     return (
         <div>
-            <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
-                <DialogTitle sx={{ margin: 2, display:'flex', alignItems:'center' }}>
-                        New Task
+            <Dialog open={props.openForm} onClose={HandleCloseDialog}>
+                <DialogTitle sx={{margin: 2, display: 'flex', alignItems: 'center', textAlign: 'center', justifyContent:'center'}}>
+                    New Task
                 </DialogTitle>
 
                 <DialogContent>
-                    <form onSubmit={handleSubmit(onSubForm)}>
+                    <FormGroup sx={{ m: 2, minWidth: 400 }}>
 
                         <TextField
                             {...register('title', {
@@ -100,7 +137,8 @@ const OpenTaskDialog = () => {
                             label="Title"
                             variant="outlined"
                             fullWidth
-                             style={{marginTop:'5px'}}/>
+                            style={{marginTop: '5px'}}
+                            onChange={HandleTitle}/>
                         {errors.title && (
                             <p style={{color: 'red'}}>{errors.title.message as string}</p>
                         )}
@@ -116,19 +154,20 @@ const OpenTaskDialog = () => {
                             label="Description"
                             variant="outlined"
                             fullWidth
-                            style={{marginTop:'3px'}}/>
+                            style={{marginTop: '3px'}}
+                            onChange={HandleDescription}/>
                         {errors.description && (
                             <p style={{color: 'red'}}>{errors.description.message as string}</p>
                         )}
 
 
-                        <FormControl fullWidth  style={{marginTop:'3px'}}>
+                        <FormControl fullWidth style={{marginTop: '3px'}}>
                             <InputLabel>Status</InputLabel>
                             <Select
                                 {...register('status', {required: true})}
                                 value={status}
                                 label="Status"
-                                onChange={handleStatusChange}
+                                onChange={HandleStatusChange}
                                 name="status"
                                 variant="outlined"
                             >
@@ -140,13 +179,13 @@ const OpenTaskDialog = () => {
                         </FormControl>
 
 
-                        <FormControl fullWidth  style={{marginTop:'3px'}}>
+                        <FormControl fullWidth style={{marginTop: '3px'}}>
                             <InputLabel>Priority</InputLabel>
                             <Select
                                 {...register('priority', {required: true})}
                                 value={priority}
                                 label="Priority"
-                                onChange={handlePriorityChange}
+                                onChange={HandlePriorityChange}
                                 name="priority"
                                 variant="outlined"
                             >
@@ -168,7 +207,8 @@ const OpenTaskDialog = () => {
                             label="Estimated Time"
                             variant="outlined"
                             fullWidth
-                            style={{marginTop:'3px'}}/>
+                            style={{marginTop: '3px'}}
+                            onChange={HandleEstTime}/>
                         {errors.estimatedTime && (
                             <p style={{color: 'red'}}>{errors.estimatedTime.message as string}</p>
                         )}
@@ -194,10 +234,12 @@ const OpenTaskDialog = () => {
                                 label="Review"
                                 variant="outlined"
                                 fullWidth
-                                style={{marginTop:'3px'}}/>}
+                                style={{marginTop: '3px'}}
+                                onChange={HandleReview}/>}
                         {errors.review && (
                             <p style={{color: 'red'}}>{errors.review.message as string}</p>
                         )}
+
                         {isClosed &&
                             <TextField
                                 {...register('timeSpent', {
@@ -209,23 +251,30 @@ const OpenTaskDialog = () => {
                                 label="Time Spent"
                                 variant="outlined"
                                 fullWidth
-                                style={{marginTop:'3px'}}/>}
+                                style={{marginTop: '3px'}}
+                            onChange={HandleTimeSpent}/>}
                         {errors.timeSpent && (
                             <p style={{color: 'red'}}>{errors.timeSpent.message as string}</p>
                         )}
-
-
-                        <Button type='submit' style={{
-                            background: "#228B22",
-                            color: "white",
-                            left: "50%",
-                            transform: "translateX(-50%)",
-                            width: "100px",
-                            height: "50px",
-                            marginTop: "10px",
-                        }}>Add</Button>
-                    </form>
+                    </FormGroup>
                 </DialogContent>
+
+                <DialogActions sx={{display: 'flex', alignItems: 'center', textAlign: 'center', justifyContent:'center', marginBottom:'5px'}}>
+                    <Button onClick={HandleSubmit} style={{
+                        background: "#228B22",
+                        color: "white",
+                        width: "100px",
+                        height: "50px"
+                    }}>Add</Button>
+
+                    <Button onClick={HandleCloseDialog}
+                            style={{
+                                background: "#FF0000",
+                                color: "white",
+                                width: "100px",
+                                height: "50px"
+                            }}>Cancel</Button>
+                </DialogActions>
             </Dialog>
             <ToastContainer/>
         </div>
