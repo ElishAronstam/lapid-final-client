@@ -1,14 +1,12 @@
 
 import TodoTableContainer from '../tableComps/TodoTableContainer';
-import Add from "../generalComps/Add";
+import AddButton from "../generalComps/AddButton";
 import Header from "../generalComps/Header";
 import {useSelector} from "react-redux";
 import {selectItemCount} from "../../features/task/taskSlice";
 
 export default function AppTodo() {
-    const tasksCount=useSelector(selectItemCount);
-    //TODO: check how many open tasks there are or in progress
-    
+
     return (
         <div
             style={{
@@ -19,9 +17,9 @@ export default function AppTodo() {
             }}
         >
             <Header/>
-            <h2>There are currently: {tasksCount} tasks</h2>
+            {/*TODO: includes search and filter and add button <MenuBar />*/}
             <TodoTableContainer/>
-            <Add/>
+            <AddButton/>
         </div>
 
     )

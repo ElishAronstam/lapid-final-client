@@ -1,10 +1,10 @@
 import {Button, Fab} from '@mui/material'
-import React from 'react'
-import {useNavigate} from 'react-router-dom';
+import React, {useState} from 'react'
+import OpenTaskDialog from "../todoComps/OpenTaskDialog";
 
-export default function Add() {
-    const nav = useNavigate();
+export default function AddButton() {
 
+    const [openForm, setOpenForm]=useState(false);
     return (
         <>
             <Button
@@ -15,15 +15,16 @@ export default function Add() {
                     bottom: 0,
                     left: "50%",
                     transform: "translateX(-50%)",
-                    width: "100px", // Set the width to make it square
-                    height: "50px", // Set the height to make it square
+                    width: "100px",
+                    height: "50px"
                 }}
                 onClick={() => {
-                    nav("/todoInput")
+                    setOpenForm(true);
                 }}
                 aria-label="todoInput">
                 Create
             </Button>
+            {openForm &&  <OpenTaskDialog />}
         </>
     )
 }
