@@ -9,7 +9,7 @@ export const taskSlice = createSlice({
     initialState: {
         tasks: getInitTasks(),
         currentTaskId:"",
-        openDialogBox:false,
+        openFormDialogBox:false,
     },
     reducers: {
         addTask(state, action) {
@@ -39,12 +39,12 @@ export const taskSlice = createSlice({
         updateCurrentTaskId: (state, action) => {
             state.currentTaskId = action.payload;
         },
-        openDialogBox:(state)=>{
-            state.openDialogBox=true;
+        openFormDialogBox:(state)=>{
+            state.openFormDialogBox=true;
         },
 
-        closeDialogBox:(state)=>{
-            state.openDialogBox=false;
+        closeFormDialogBox:(state)=>{
+            state.openFormDialogBox=false;
         }
     }
 });
@@ -55,10 +55,15 @@ export const selectItemCount = createSelector(
     [selectTasks],
     (items) => items.length
 );
+export const selectCurrentTask = (state: RootState) => {
+    return state.taskSlice.tasks.find(
+        (task) => task.id === state.taskSlice.currentTaskId
+    );
+};
 
-export const openDialogBoxSelector=(state:RootState)=>state.taskSlice.openDialogBox;
+export const openFormDialogBoxSelector=(state:RootState)=>state.taskSlice.openFormDialogBox;
 
 
-export const {addTask, delSingleTask,updateCurrentTaskId, openDialogBox, closeDialogBox} = taskSlice.actions;
+export const {addTask, delSingleTask,updateCurrentTaskId, openFormDialogBox, closeFormDialogBox} = taskSlice.actions;
 
 export default taskSlice.reducer;

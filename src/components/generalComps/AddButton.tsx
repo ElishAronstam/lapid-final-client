@@ -1,10 +1,11 @@
-import {Button, Fab} from '@mui/material'
-import React, {useState} from 'react'
-import OpenTaskDialog from "../dialogComps/OpenTaskDialog";
+import {Button} from '@mui/material'
+import React from 'react'
+import {useDispatch} from "react-redux";
+import {openFormDialogBox} from "../../features/task/taskSlice";
 
 export default function AddButton() {
 
-    const [openForm, setOpenForm]=useState(false);
+    const dispatch=useDispatch();
 
     return (
         <>
@@ -21,12 +22,12 @@ export default function AddButton() {
                     marginBottom: '10px', // Equal margin at the top and bottom
                 }}
                 onClick={() => {
-                    setOpenForm(true);
+                    dispatch(openFormDialogBox());
                 }}
                 aria-label="todoInput">
                 Create
             </Button>
-            {openForm &&  <OpenTaskDialog openForm={openForm} setOpenForm={setOpenForm}/>}
+
         </>
     )
 }

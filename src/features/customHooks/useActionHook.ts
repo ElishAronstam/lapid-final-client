@@ -1,6 +1,6 @@
 import {useDispatch} from "react-redux";
 import ITask from "../../types/ITask";
-import {addTask, delSingleTask, updateCurrentTaskId,openDialogBox} from '../task/taskSlice';
+import {addTask, delSingleTask, updateCurrentTaskId, openFormDialogBox} from '../task/taskSlice';
 
 const useActionHook=()=>{
     const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const useActionHook=()=>{
 
     const viewTaskDetails=(taskId:string)=>{
         dispatch(updateCurrentTaskId(taskId));
-        dispatch(openDialogBox());
+        dispatch(openFormDialogBox());
     }
 
     return {addTaskToStore, deleteTaskFromStore,viewTaskDetails};

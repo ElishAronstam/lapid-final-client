@@ -4,7 +4,8 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle,
-    FormControl, FormGroup,
+    FormControl,
+    FormGroup,
     InputLabel,
     MenuItem,
     Select,
@@ -13,7 +14,13 @@ import {
 import {useForm} from 'react-hook-form';
 import React, {useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import {closeDialogBox, openDialogBoxSelector, selectItemCount} from '../../features/task/taskSlice'
+import {
+    closeFormDialogBox,
+    openFormDialogBox, openFormDialogBoxSelector,
+    selectCurrentTask,
+    selectItemCount,
+    updateCurrentTaskId
+} from '../../features/task/taskSlice'
 import {DesktopDateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import dayjs, {Dayjs} from 'dayjs';
 import utc from "dayjs/plugin/utc";
@@ -23,14 +30,7 @@ import useActionHook from "../../features/customHooks/useActionHook";
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-interface ITaskDialogProps{
-    openForm:boolean;
-    setOpenForm:(isOpen:boolean)=>void;
-    task?:ITask;
-}
-
-const OpenTaskDialog = (props:ITaskDialogProps) => {
-
+const OpenFormDialogBox = () => {
     const {register, formState: {errors}} = useForm();
     const {addTaskToStore} = useActionHook();
     dayjs.extend(utc);
@@ -50,32 +50,32 @@ const OpenTaskDialog = (props:ITaskDialogProps) => {
     const [timeSpent, setTimeSpent] = useState("");
 
     const tasksCount = useSelector(selectItemCount);
-    const openDialog = useSelector(openDialogBoxSelector);
+    const openDialog = useSelector(openFormDialogBoxSelector);
 
     const dispatch = useDispatch();
 
 
-    const HandleTitle=(e:React.ChangeEvent<HTMLInputElement>)=>{
+    const HandleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
     }
 
-    const HandleDescription=(e:React.ChangeEvent<HTMLInputElement>)=>{
+    const HandleDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
         setDescription(e.target.value);
     }
 
-    const HandleEstTime=(e:React.ChangeEvent<HTMLInputElement>)=>{
+    const HandleEstTime = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEstTime(e.target.value);
     }
 
-    const HandleReview=(e:React.ChangeEvent<HTMLInputElement>)=>{
+    const HandleReview = (e: React.ChangeEvent<HTMLInputElement>) => {
         setReview(e.target.value);
     }
-    const HandleTimeSpent=(e:React.ChangeEvent<HTMLInputElement>)=>{
+    const HandleTimeSpent = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTimeSpent(e.target.value);
     }
 
 
-    const HandlePriorityChange = (e:any) => {
+    const HandlePriorityChange = (e: any) => {
         if (e.target.value == "High") {
             setIsUrgent(true);
         } else {
@@ -94,13 +94,14 @@ const OpenTaskDialog = (props:ITaskDialogProps) => {
     }
 
     const HandleCloseDialog = () => {
-        dispatch(closeDialogBox());
+        dispatch(closeFormDialogBox());
+        dispatch(updateCurrentTaskId(""));
     }
 
-    const HandleSubmit=()=>{
+    const HandleSubmit = () => {
         const newTask: ITask = {
             id: (Number(tasksCount) + 1).toString(),
-            title:title,
+            title: title,
             description: description,
             estimatedTime: estTime,
             status: status,
@@ -119,16 +120,21 @@ const OpenTaskDialog = (props:ITaskDialogProps) => {
     }
 
 
-
     return (
         <div>
             <Dialog open={openDialog} onClose={HandleCloseDialog}>
-                <DialogTitle sx={{margin: 2, display: 'flex', alignItems: 'center', textAlign: 'center', justifyContent:'center'}}>
+                <DialogTitle sx={{
+                    margin: 2,
+                    display: 'flex',
+                    alignItems: 'center',
+                    textAlign: 'center',
+                    justifyContent: 'center'
+                }}>
                     New Task
                 </DialogTitle>
 
                 <DialogContent>
-                    <FormGroup sx={{ m: 2, minWidth: 400 }}>
+                    <FormGroup sx={{m: 2, minWidth: 400}}>
 
                         <TextField
                             {...register('title', {
@@ -254,14 +260,20 @@ const OpenTaskDialog = (props:ITaskDialogProps) => {
                                 variant="outlined"
                                 fullWidth
                                 style={{marginTop: '3px'}}
-                            onChange={HandleTimeSpent}/>}
+                                onChange={HandleTimeSpent}/>}
                         {errors.timeSpent && (
                             <p style={{color: 'red'}}>{errors.timeSpent.message as string}</p>
                         )}
                     </FormGroup>
                 </DialogContent>
 
-                <DialogActions sx={{display: 'flex', alignItems: 'center', textAlign: 'center', justifyContent:'center', marginBottom:'5px'}}>
+                <DialogActions sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    textAlign: 'center',
+                    justifyContent: 'center',
+                    marginBottom: '5px'
+                }}>
                     <Button onClick={HandleSubmit} style={{
                         background: "#228B22",
                         color: "white",
@@ -284,4 +296,4 @@ const OpenTaskDialog = (props:ITaskDialogProps) => {
 
 }
 
-export default OpenTaskDialog;
+export default OpenFormDialogBox;

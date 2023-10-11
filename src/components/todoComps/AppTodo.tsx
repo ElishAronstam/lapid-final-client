@@ -1,9 +1,7 @@
-
 import TodoTableContainer from '../tableComps/TodoTableContainer';
 import AddButton from "../generalComps/AddButton";
 import Header from "../generalComps/Header";
-import {useSelector} from "react-redux";
-import {selectItemCount} from "../../features/task/taskSlice";
+import OpenFormDialogBox from "../dialogComps/OpenFormDialogBox";
 
 export default function AppTodo() {
 
@@ -16,10 +14,14 @@ export default function AppTodo() {
                 justifyContent: 'center',
             }}
         >
+            {/*Main Components*/}
             <Header/>
             {/*TODO: includes search and filter and add button <MenuBar />*/}
             <TodoTableContainer/>
             <AddButton/>
+
+            {/* Prompted Components*/}
+            <OpenFormDialogBox/>
         </div>
 
     )
