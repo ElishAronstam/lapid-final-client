@@ -3,7 +3,7 @@ import {IconButton, TableCell, TableRow, Tooltip} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import NoteIcon from '@mui/icons-material/Note';
 import useActionHook from "../../features/customHooks/useActionHook";
-import ConfirmationDialog from "../generalComps/ConfirmationDialog";
+import ConfirmationDialog from "../dialogComps/ConfirmationDialog";
 import {useState} from "react";
 
 interface ITaskProps {

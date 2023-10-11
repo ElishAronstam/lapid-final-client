@@ -1,6 +1,6 @@
 import {Button, Fab} from '@mui/material'
 import React, {useState} from 'react'
-import OpenTaskDialog from "../todoComps/OpenTaskDialog";
+import OpenTaskDialog from "../dialogComps/OpenTaskDialog";
 
 export default function AddButton() {
 

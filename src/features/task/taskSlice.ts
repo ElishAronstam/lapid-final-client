@@ -7,7 +7,9 @@ import {RootState} from "../../App";
 export const taskSlice = createSlice({
     name: 'tasks',
     initialState: {
-        tasks: getInitTasks()
+        tasks: getInitTasks(),
+        currentTaskId:"",
+        openDialogBox:false,
     },
     reducers: {
         addTask(state, action) {
@@ -31,6 +33,18 @@ export const taskSlice = createSlice({
             });
 
             state.tasks = newTodoList;
+        },
+
+        //Updates which task id was  pressed by user
+        updateCurrentTaskId: (state, action) => {
+            state.currentTaskId = action.payload;
+        },
+        openDialogBox:(state)=>{
+            state.openDialogBox=true;
+        },
+
+        closeDialogBox:(state)=>{
+            state.openDialogBox=false;
         }
     }
 });
@@ -42,6 +56,9 @@ export const selectItemCount = createSelector(
     (items) => items.length
 );
 
-export const {addTask, delSingleTask, updateTask} = taskSlice.actions;
+export const openDialogBoxSelector=(state:RootState)=>state.taskSlice.openDialogBox;
+
+
+export const {addTask, delSingleTask,updateCurrentTaskId, openDialogBox, closeDialogBox} = taskSlice.actions;
 
 export default taskSlice.reducer;

@@ -1,6 +1,6 @@
 import {useDispatch} from "react-redux";
 import ITask from "../../types/ITask";
-import {addTask, delSingleTask, selectItemCount, updateTask} from '../task/taskSlice';
+import {addTask, delSingleTask, updateCurrentTaskId,openDialogBox} from '../task/taskSlice';
 
 const useActionHook=()=>{
     const dispatch = useDispatch();
@@ -10,14 +10,15 @@ const useActionHook=()=>{
     }
 
     const deleteTaskFromStore=(taskId:string)=>{
-        console.log(taskId);
         dispatch(delSingleTask(taskId));
     }
-    //TODO: not sure what to do here
-    const viewTaskDetails=(taskId:string)=>{
 
+    const viewTaskDetails=(taskId:string)=>{
+        dispatch(updateCurrentTaskId(taskId));
+        dispatch(openDialogBox());
     }
 
     return {addTaskToStore, deleteTaskFromStore,viewTaskDetails};
 }
+
 export default useActionHook;

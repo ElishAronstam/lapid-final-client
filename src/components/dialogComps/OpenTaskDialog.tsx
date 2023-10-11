@@ -12,8 +12,8 @@ import {
 } from "@mui/material";
 import {useForm} from 'react-hook-form';
 import React, {useState} from "react";
-import {useSelector} from 'react-redux';
-import {selectItemCount} from '../../features/task/taskSlice'
+import {useDispatch, useSelector} from 'react-redux';
+import {closeDialogBox, openDialogBoxSelector, selectItemCount} from '../../features/task/taskSlice'
 import {DesktopDateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import dayjs, {Dayjs} from 'dayjs';
 import utc from "dayjs/plugin/utc";
@@ -26,6 +26,7 @@ import 'react-toastify/dist/ReactToastify.css';
 interface ITaskDialogProps{
     openForm:boolean;
     setOpenForm:(isOpen:boolean)=>void;
+    task?:ITask;
 }
 
 const OpenTaskDialog = (props:ITaskDialogProps) => {
@@ -47,10 +48,12 @@ const OpenTaskDialog = (props:ITaskDialogProps) => {
     const [estTime, setEstTime] = useState("");
     const [review, setReview] = useState("");
     const [timeSpent, setTimeSpent] = useState("");
-    //
-    // const [openDialog, setOpenDialog] = useState(true);
 
     const tasksCount = useSelector(selectItemCount);
+    const openDialog = useSelector(openDialogBoxSelector);
+
+    const dispatch = useDispatch();
+
 
     const HandleTitle=(e:React.ChangeEvent<HTMLInputElement>)=>{
         setTitle(e.target.value);
@@ -91,7 +94,7 @@ const OpenTaskDialog = (props:ITaskDialogProps) => {
     }
 
     const HandleCloseDialog = () => {
-        props.setOpenForm(false);
+        dispatch(closeDialogBox());
     }
 
     const HandleSubmit=()=>{
@@ -119,7 +122,7 @@ const OpenTaskDialog = (props:ITaskDialogProps) => {
 
     return (
         <div>
-            <Dialog open={props.openForm} onClose={HandleCloseDialog}>
+            <Dialog open={openDialog} onClose={HandleCloseDialog}>
                 <DialogTitle sx={{margin: 2, display: 'flex', alignItems: 'center', textAlign: 'center', justifyContent:'center'}}>
                     New Task
                 </DialogTitle>
@@ -142,7 +145,6 @@ const OpenTaskDialog = (props:ITaskDialogProps) => {
                         {errors.title && (
                             <p style={{color: 'red'}}>{errors.title.message as string}</p>
                         )}
-
 
                         <TextField
                             {...register('description', {
