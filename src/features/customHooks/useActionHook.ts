@@ -1,6 +1,7 @@
 import {useDispatch} from "react-redux";
 import ITask from "../../types/ITask";
-import {addTask, delSingleTask, updateCurrentTaskId, openFormDialogBox} from '../task/taskSlice';
+import {addTask, delSingleTask, updateCurrentTaskId, openFormDialogBox, openReadDialogBox} from '../task/taskSlice';
+import {makeStyles} from "@mui/material";
 
 const useActionHook=()=>{
     const dispatch = useDispatch();
@@ -15,10 +16,11 @@ const useActionHook=()=>{
 
     const viewTaskDetails=(taskId:string)=>{
         dispatch(updateCurrentTaskId(taskId));
-        dispatch(openFormDialogBox());
+        dispatch(openReadDialogBox());
     }
 
     return {addTaskToStore, deleteTaskFromStore,viewTaskDetails};
 }
+
 
 export default useActionHook;

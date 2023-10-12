@@ -15,12 +15,10 @@ import {useForm} from 'react-hook-form';
 import React, {useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import {
-    closeFormDialogBox,
-    openFormDialogBox, openFormDialogBoxSelector,
-    selectCurrentTask,
+    openFormDialogBoxSelector,
     selectItemCount,
-    updateCurrentTaskId
-} from '../../features/task/taskSlice'
+} from '../../features/task/taskSelectors'
+import {closeFormDialogBox} from "../../features/task/taskSlice"
 import {DesktopDateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import dayjs, {Dayjs} from 'dayjs';
 import utc from "dayjs/plugin/utc";
@@ -35,7 +33,7 @@ const OpenFormDialogBox = () => {
     const {addTaskToStore} = useActionHook();
     dayjs.extend(utc);
 
-    const [untilDate, setUntilDate] = React.useState<Dayjs | null>(
+    const [endTime, setEndTime] = React.useState<Dayjs | null>(
         dayjs.utc(new Date())
     );
     const [priority, setPriority] = useState("");
@@ -95,7 +93,6 @@ const OpenFormDialogBox = () => {
 
     const HandleCloseDialog = () => {
         dispatch(closeFormDialogBox());
-        dispatch(updateCurrentTaskId(""));
     }
 
     const HandleSubmit = () => {
@@ -108,7 +105,7 @@ const OpenFormDialogBox = () => {
             priority: priority,
             review: isClosed ? review : undefined,
             timeSpent: isClosed ? timeSpent : undefined,
-            endTime: (isClosed || isUrgent) ? untilDate?.toISOString() : undefined,
+            endTime: (isClosed || isUrgent) ? endTime?.toISOString() : undefined,
         };
 
         addTaskToStore(newTask);
@@ -225,10 +222,10 @@ const OpenFormDialogBox = () => {
                         {(isUrgent || isClosed) &&
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DesktopDateTimePicker
-                                    label="Select Until Date"
-                                    value={dayjs.utc(untilDate)}
+                                    label="Select End Time"
+                                    value={dayjs.utc(endTime)}
                                     minDate={dayjs.utc(new Date())}
-                                    onChange={(newDateTime) => setUntilDate(newDateTime)}/>
+                                    onChange={(newDateTime) => setEndTime(newDateTime)}/>
                             </LocalizationProvider>}
 
                         {isClosed &&

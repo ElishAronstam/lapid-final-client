@@ -8,8 +8,9 @@ export const taskSlice = createSlice({
     name: 'tasks',
     initialState: {
         tasks: getInitTasks(),
-        currentTaskId:"",
-        openFormDialogBox:false,
+        currentTaskId: "",
+        openFormDialogBox: false,
+        openReadDialogBox: false,
     },
     reducers: {
         addTask(state, action) {
@@ -35,35 +36,30 @@ export const taskSlice = createSlice({
             state.tasks = newTodoList;
         },
 
+
         //Updates which task id was  pressed by user
         updateCurrentTaskId: (state, action) => {
             state.currentTaskId = action.payload;
         },
-        openFormDialogBox:(state)=>{
-            state.openFormDialogBox=true;
+        openFormDialogBox: (state) => {
+            state.openFormDialogBox = true;
         },
 
-        closeFormDialogBox:(state)=>{
-            state.openFormDialogBox=false;
+        closeFormDialogBox: (state) => {
+            state.openFormDialogBox = false;
+        },
+
+        openReadDialogBox: (state) => {
+            state.openReadDialogBox = true;
+        },
+
+        closeReadDialogBox: (state) => {
+            state.openReadDialogBox = false;
         }
     }
 });
 
-export const selectTasks = (state: RootState) => state.taskSlice.tasks;
 
-export const selectItemCount = createSelector(
-    [selectTasks],
-    (items) => items.length
-);
-export const selectCurrentTask = (state: RootState) => {
-    return state.taskSlice.tasks.find(
-        (task) => task.id === state.taskSlice.currentTaskId
-    );
-};
-
-export const openFormDialogBoxSelector=(state:RootState)=>state.taskSlice.openFormDialogBox;
-
-
-export const {addTask, delSingleTask,updateCurrentTaskId, openFormDialogBox, closeFormDialogBox} = taskSlice.actions;
+export const {addTask, delSingleTask, updateCurrentTaskId, openFormDialogBox, closeFormDialogBox, openReadDialogBox, closeReadDialogBox} = taskSlice.actions;
 
 export default taskSlice.reducer;

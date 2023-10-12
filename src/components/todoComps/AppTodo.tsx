@@ -1,9 +1,16 @@
 import TodoTableContainer from '../tableComps/TodoTableContainer';
-import AddButton from "../generalComps/AddButton";
+import AddButton from "../menuBarComps/AddButton";
 import Header from "../generalComps/Header";
 import OpenFormDialogBox from "../dialogComps/OpenFormDialogBox";
+import OpenReadDialogBox from "../dialogComps/OpenReadDialogBox";
+import Search from "../menuBarComps/Search";
+import QuickFilters from "../menuBarComps/QuickFilters";
+import {useState} from "react";
 
 export default function AppTodo() {
+
+    const [query,setQuery]=useState("");
+
 
     return (
         <div
@@ -16,12 +23,16 @@ export default function AppTodo() {
         >
             {/*Main Components*/}
             <Header/>
-            {/*TODO: includes search and filter and add button <MenuBar />*/}
-            <TodoTableContainer/>
+            <Search query={query} setQuery={setQuery}/>
+            {/*Send filter states and sets*/}
+            <QuickFilters />
+            {/*send query and filter*/}
+            <TodoTableContainer />
             <AddButton/>
 
             {/* Prompted Components*/}
-            <OpenFormDialogBox/>
+            <OpenFormDialogBox />
+            <OpenReadDialogBox />
         </div>
 
     )

@@ -3,12 +3,13 @@ import TodoTableHead from "./TodoTableHead";
 import {Paper, Table, TableContainer} from "@mui/material";
 import useGetDataHook from "../../features/customHooks/useGetDataHook";
 import {useSelector} from "react-redux";
-import {selectItemCount} from "../../features/task/taskSlice";
+import {selectItemCount} from "../../features/task/taskSelectors";
 
 const TodoTableContainer = () => {
     const tasksCount=useSelector(selectItemCount);
     const titles=["Index","Priority","Title","Description","Estimated Time","End Time","Review","Status","Time Spent","Actions"];
     const tasks=useGetDataHook();
+    //TODO:function the filters tasks and sends to todo table for display
 
     return (
         <>
