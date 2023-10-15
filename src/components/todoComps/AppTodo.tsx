@@ -7,9 +7,7 @@ import Search from "../menuBarComps/Search";
 import QuickFilters from "../menuBarComps/QuickFilters";
 import {useState} from "react";
 
-export default function AppTodo() {
-
-    const [query,setQuery]=useState("");
+const AppTodo=() =>{
 
 
     return (
@@ -23,7 +21,7 @@ export default function AppTodo() {
         >
             {/*Main Components*/}
             <Header/>
-            <Search query={query} setQuery={setQuery}/>
+            <Search />
             {/*Send filter states and sets*/}
             <QuickFilters />
             {/*send query and filter*/}
@@ -37,3 +35,5 @@ export default function AppTodo() {
 
     )
 }
+
+export default AppTodo;

@@ -1,4 +1,4 @@
-import {createSelector, createSlice} from "@reduxjs/toolkit";
+import {createSelector, createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {getInitTasks} from "./helper";
 import ITask from "../../types/ITask";
 import {RootState} from "../../App";
@@ -11,6 +11,8 @@ export const taskSlice = createSlice({
         currentTaskId: "",
         openFormDialogBox: false,
         openReadDialogBox: false,
+        filterTaskByOpenStatus: false,
+        filterTaskByHighPriority: false,
     },
     reducers: {
         addTask(state, action) {
@@ -36,6 +38,10 @@ export const taskSlice = createSlice({
             state.tasks = newTodoList;
         },
 
+        setTasks(state, action:PayloadAction<ITask[]>) {
+            state.tasks=action.payload;
+        },
+
 
         //Updates which task id was  pressed by user
         updateCurrentTaskId: (state, action) => {
@@ -55,11 +61,20 @@ export const taskSlice = createSlice({
 
         closeReadDialogBox: (state) => {
             state.openReadDialogBox = false;
-        }
+        },
+
+        toggleFilterByPriority:(state) => {
+            state.filterTaskByHighPriority=!state.filterTaskByHighPriority;
+        },
+
+        toggleFilterByStatus:(state) => {
+            state.filterTaskByOpenStatus=!state.filterTaskByOpenStatus;
+        },
+
     }
 });
 
 
-export const {addTask, delSingleTask, updateCurrentTaskId, openFormDialogBox, closeFormDialogBox, openReadDialogBox, closeReadDialogBox} = taskSlice.actions;
+export const {addTask, delSingleTask, updateCurrentTaskId, openFormDialogBox, closeFormDialogBox, openReadDialogBox, closeReadDialogBox, setTasks, toggleFilterByPriority,toggleFilterByStatus} = taskSlice.actions;
 
 export default taskSlice.reducer;

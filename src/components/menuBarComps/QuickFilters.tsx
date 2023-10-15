@@ -2,6 +2,8 @@ import {AppBar, Button, DialogContentText, styled, Toolbar, Typography, withStyl
 import {deepPurple} from "@mui/material/colors"
 import useGetDataHook from "../../features/customHooks/useGetDataHook";
 import {useDispatch} from "react-redux";
+import {toggleHighPriorityFilter} from "../../features/redux/actions";
+import {toggleOpenStatusFilter} from "../../features/redux/actions";
 
 const QuickFilters = () => {
 
@@ -25,13 +27,11 @@ const QuickFilters = () => {
 
     const HandleFilterByOpen=()=>
     {
-
-
-
+        dispatch(toggleOpenStatusFilter());
     };
 
     const HandleFilterByPriority=()=>{
-
+        dispatch(toggleHighPriorityFilter());
     };
 
     return(
