@@ -3,8 +3,7 @@ import {combineEpics} from "redux-observable";
 import toggleOpenStatusFilterEpic from "./toggleOpenStatusFilterEpic";
 
 
-
-const rootEpic=combineEpics(
+const rootEpic = combineEpics(
     toggleHighPriorityFilterEpic,
     toggleOpenStatusFilterEpic,
 );

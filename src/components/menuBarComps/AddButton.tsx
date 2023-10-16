@@ -6,20 +6,19 @@ import {purple} from "@mui/material/colors";
 
 export default function AddButton() {
 
-    const dispatch=useDispatch();
+    const dispatch = useDispatch();
 
     const StyledButton = styled(Button)(({theme}) => ({
         margin: theme.spacing(3),
-        height:"50px",
+        height: "50px",
         width: "100px",
-        position:'sticky',
+        position: 'sticky',
         bottom: 10,
-        backgroundColor:purple[500],
-        color:purple[50]
+        backgroundColor: purple[500],
+        color: purple[50]
     }));
 
-    return (
-        <>
+    return (<>
             <StyledButton
                 onClick={() => {
                     dispatch(openFormDialogBox());
@@ -27,6 +26,5 @@ export default function AddButton() {
                 aria-label="todoInput">
                 Create
             </StyledButton>
-        </>
-    )
+        </>)
 }

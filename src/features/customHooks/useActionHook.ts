@@ -1,25 +1,24 @@
 import {useDispatch} from "react-redux";
 import ITask from "../../types/ITask";
-import {addTask, delSingleTask, updateCurrentTaskId, openFormDialogBox, openReadDialogBox} from '../task/taskSlice';
-import {makeStyles} from "@mui/material";
+import {addTask, delSingleTask, openReadDialogBox, updateCurrentTaskId} from '../task/taskSlice';
 
-const useActionHook=()=>{
+const useActionHook = () => {
     const dispatch = useDispatch();
 
-    const addTaskToStore=(task:ITask)=>{
+    const addTaskToStore = (task: ITask) => {
         dispatch(addTask(task));
     }
 
-    const deleteTaskFromStore=(taskId:string)=>{
+    const deleteTaskFromStore = (taskId: string) => {
         dispatch(delSingleTask(taskId));
     }
 
-    const viewTaskDetails=(taskId:string)=>{
+    const viewTaskDetails = (taskId: string) => {
         dispatch(updateCurrentTaskId(taskId));
         dispatch(openReadDialogBox());
     }
 
-    return {addTaskToStore, deleteTaskFromStore,viewTaskDetails};
+    return {addTaskToStore, deleteTaskFromStore, viewTaskDetails};
 }
 
 

@@ -9,15 +9,11 @@ interface IProps {
 
 const TodoTable = (props: IProps) => {
 
-    return (
-        <TableBody>
-            {
-                props.tasks.map((task: ITask, index: number) => {
-                    return <TodoItem key={index} task={task}></TodoItem>
-                })
-            }
-        </TableBody>
-    );
+    return (<TableBody>
+            {props.tasks.map((task: ITask, index: number) => {
+                return <TodoItem key={index} task={task}></TodoItem>
+            })}
+        </TableBody>);
 }
 
 export default TodoTable;

@@ -23,8 +23,7 @@ const TodoItem = (props: ITaskProps) => {
         setIsConfirmationOpen(false);
     }
 
-    return (
-        <TableRow>
+    return (<TableRow>
             <TableCell>
                 {task.id}
             </TableCell>
@@ -65,12 +64,10 @@ const TodoItem = (props: ITaskProps) => {
                     </IconButton>
                 </Tooltip>
             </TableCell>
-            {isConfirmationOpen && (
-                <ConfirmationDialog
+            {isConfirmationOpen && (<ConfirmationDialog
                     TaskName={task.title}
                     onConfirm={HandleDeleteItem}
-                />
-            )}
+                />)}
         </TableRow>
 
     )

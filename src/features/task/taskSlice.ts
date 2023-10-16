@@ -1,7 +1,6 @@
-import {createSelector, createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {getInitTasks} from "./helper";
 import ITask from "../../types/ITask";
-import {RootState} from "../../App";
 
 
 export const taskSlice = createSlice({

@@ -5,10 +5,9 @@ import OpenFormDialogBox from "../dialogComps/OpenFormDialogBox";
 import OpenReadDialogBox from "../dialogComps/OpenReadDialogBox";
 import Search from "../menuBarComps/Search";
 import QuickFilters from "../menuBarComps/QuickFilters";
-import {useState} from "react";
 
-const AppTodo=() =>{
 
+const AppTodo = () => {
 
     return (
         <div
@@ -21,16 +20,16 @@ const AppTodo=() =>{
         >
             {/*Main Components*/}
             <Header/>
-            <Search />
+            <Search/>
             {/*Send filter states and sets*/}
-            <QuickFilters />
+            <QuickFilters/>
             {/*send query and filter*/}
-            <TodoTableContainer />
+            <TodoTableContainer/>
             <AddButton/>
 
             {/* Prompted Components*/}
-            <OpenFormDialogBox />
-            <OpenReadDialogBox />
+            <OpenFormDialogBox/>
+            <OpenReadDialogBox/>
         </div>
 
     )
