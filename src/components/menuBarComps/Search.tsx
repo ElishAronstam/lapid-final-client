@@ -11,7 +11,6 @@ import {getInitTasks} from "../../features/task/helper";
 const Search = () => {
     const [query, setQuery] = useState("");
     const tasks = useGetDataHook();
-    const [filteredTasks, setFilteredTasks] = useState(tasks);
     const dispatch = useDispatch();
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,13 +24,13 @@ const Search = () => {
 
     useEffect(() => {
         if (query === "") {
-            setFilteredTasks(getInitTasks());
-            console.log(query);
-            dispatch(setTasks(filteredTasks));
+            const filtered=getInitTasks();
+            dispatch(setTasks(filtered));
         } else {
-            setFilteredTasks(tasks.filter((task: ITask) => task.title.toLowerCase().includes((query.toLowerCase()))));
-            console.log(query);
-            dispatch(setTasks(filteredTasks));
+            const filtered=tasks.filter((task: ITask) => {
+              return task.title.toString().toLowerCase().includes((query.toLowerCase()));
+            } );
+            dispatch(setTasks(filtered));
         }
     }, [query]);
 
