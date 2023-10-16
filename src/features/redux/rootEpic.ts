@@ -1,11 +1,8 @@
-import toggleHighPriorityFilterEpic from "./toggleHighPriorityFilterEpic";
 import {combineEpics} from "redux-observable";
-import toggleOpenStatusFilterEpic from "./toggleOpenStatusFilterEpic";
-
+import toggleFiltersEpic from "./toggleFiltersEpic";
 
 const rootEpic = combineEpics(
-    toggleHighPriorityFilterEpic,
-    toggleOpenStatusFilterEpic,
+   toggleFiltersEpic
 );
 
 export default rootEpic;
