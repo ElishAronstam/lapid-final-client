@@ -2,7 +2,7 @@ import {Button, styled} from '@mui/material'
 import React from 'react'
 import {useDispatch} from "react-redux";
 import {openFormDialogBox} from "../../features/task/taskSlice";
-import {purple} from "@mui/material/colors";
+import {deepPurple, purple} from "@mui/material/colors";
 
 export default function AddButton() {
 
@@ -15,7 +15,12 @@ export default function AddButton() {
         position: 'sticky',
         bottom: 10,
         backgroundColor: purple[500],
-        color: purple[50]
+        color: purple[50],
+        '&:hover': {
+            backgroundColor: deepPurple[50],
+            color: deepPurple[600],
+            border: `2px solid ${deepPurple[600]}`,
+        },
     }));
 
     return (<>

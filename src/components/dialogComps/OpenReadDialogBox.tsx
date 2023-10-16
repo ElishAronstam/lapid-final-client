@@ -15,13 +15,13 @@ const OpenReadDialogBox = () => {
 
     const dispatch = useDispatch();
 
-    const HandleCloseDialog = () => {
+    const handleCloseDialog = () => {
         dispatch(closeReadDialogBox());
         dispatch(updateCurrentTaskId(""));
     }
 
     return (<div>
-            {task && <Dialog open={openDialog} onClose={HandleCloseDialog}>
+            {task && <Dialog open={openDialog} onClose={handleCloseDialog}>
                 <DialogTitle sx={{
                     margin: 2, display: 'flex', alignItems: 'center', textAlign: 'center', justifyContent: 'center'
                 }}>
@@ -63,7 +63,7 @@ const OpenReadDialogBox = () => {
                     justifyContent: 'center',
                     marginBottom: '5px'
                 }}>
-                    <Button onClick={HandleCloseDialog}
+                    <Button onClick={handleCloseDialog}
                             style={{
                                 background: "#FF0000", color: "white", width: "100px", height: "50px"
                             }}>Close</Button>

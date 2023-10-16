@@ -11,7 +11,12 @@ const QuickFilters = () => {
         marginTop: theme.spacing(3),
         marginRight: theme.spacing(1),
         backgroundColor: deepPurple[300],
-        color: deepPurple[50]
+        color: deepPurple[50],
+        '&:hover': {
+            backgroundColor: deepPurple[50],
+            color: deepPurple[400],
+            border: `2px solid ${deepPurple[400]}`
+        },
     }));
 
     const StyledTopography = styled(Typography)(({theme}) => ({
@@ -34,8 +39,8 @@ const QuickFilters = () => {
             <StyledTopography>
                 QUICK FILTERS:
             </StyledTopography>
-            <StyledButton onClick={handleFilterByOpen}> Open Tasks</StyledButton>
-            <StyledButton onClick={handleFilterByPriority}> High Priority Tasks</StyledButton>
+            <StyledButton onClick={handleFilterByOpen}> Open Tasks </StyledButton>
+            <StyledButton onClick={handleFilterByPriority}> High Priority Tasks </StyledButton>
         </div>
     )
 }

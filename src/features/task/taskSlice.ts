@@ -14,36 +14,34 @@ export const taskSlice = createSlice({
         filterTaskByHighPriority: false,
     },
     reducers: {
-        addTask(state, action) {
+        addTask: (state, action:PayloadAction<ITask>) => {
             state.tasks.push(action.payload);
         },
 
-        delSingleTask(state, action) {
+        delSingleTask: (state, action:PayloadAction<string>) => {
             state.tasks = state.tasks.filter(
                 (task) => task.id !== action.payload
             )
         },
 
-        updateTask(state, action) {
-            let newTodoList: ITask[] = state.tasks;
-            newTodoList = newTodoList.map(task => {
-                if (task.id === action.payload.id) {
-                    return action.payload;
-                } else {
-                    return task;
-                }
-            });
+        // updateTask:(state, action) {
+        //     let newTodoList: ITask[] = state.tasks;
+        //     newTodoList = newTodoList.map(task => {
+        //         if (task.id === action.payload.id) {
+        //             return action.payload;
+        //         } else {
+        //             return task;
+        //         }
+        //     });
+        //
+        //     state.tasks = newTodoList;
+        // },
 
-            state.tasks = newTodoList;
+        setTasks: (state, action: PayloadAction<ITask[]>) => {
+            state.tasks = action.payload;
         },
 
-        setTasks(state, action:PayloadAction<ITask[]>) {
-            state.tasks=action.payload;
-        },
-
-
-        //Updates which task id was  pressed by user
-        updateCurrentTaskId: (state, action) => {
+        updateCurrentTaskId: (state, action:PayloadAction<string>) => {
             state.currentTaskId = action.payload;
         },
         openFormDialogBox: (state) => {
@@ -62,18 +60,29 @@ export const taskSlice = createSlice({
             state.openReadDialogBox = false;
         },
 
-        toggleFilterByPriority:(state) => {
-            state.filterTaskByHighPriority=!state.filterTaskByHighPriority;
+        toggleFilterByPriority: (state) => {
+            state.filterTaskByHighPriority = !state.filterTaskByHighPriority;
         },
 
-        toggleFilterByStatus:(state) => {
-            state.filterTaskByOpenStatus=!state.filterTaskByOpenStatus;
+        toggleFilterByStatus: (state) => {
+            state.filterTaskByOpenStatus = !state.filterTaskByOpenStatus;
         },
 
     }
 });
 
 
-export const {addTask, delSingleTask, updateCurrentTaskId, openFormDialogBox, closeFormDialogBox, openReadDialogBox, closeReadDialogBox, setTasks, toggleFilterByPriority,toggleFilterByStatus} = taskSlice.actions;
+export const {
+    addTask,
+    delSingleTask,
+    updateCurrentTaskId,
+    openFormDialogBox,
+    closeFormDialogBox,
+    openReadDialogBox,
+    closeReadDialogBox,
+    setTasks,
+    toggleFilterByPriority,
+    toggleFilterByStatus
+} = taskSlice.actions;
 
 export default taskSlice.reducer;

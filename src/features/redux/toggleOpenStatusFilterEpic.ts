@@ -7,7 +7,7 @@ import {toggleFilterByStatus} from "../task/taskSlice";
 const toggleHighPriorityFilterEpic: Epic = (action$, state$) =>
     action$.pipe(
         ofType(TOGGLE_OPEN_STATUS_FILTER),
-        switchMap((action) => {
+        switchMap(() => {
                 return [toggleFilterByStatus()]
             }
         )

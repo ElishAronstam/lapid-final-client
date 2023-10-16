@@ -21,5 +21,4 @@ const useActionHook = () => {
     return {addTaskToStore, deleteTaskFromStore, viewTaskDetails};
 }
 
-
 export default useActionHook;

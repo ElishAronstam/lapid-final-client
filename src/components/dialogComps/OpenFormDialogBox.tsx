@@ -53,27 +53,27 @@ const OpenFormDialogBox = () => {
     const dispatch = useDispatch();
 
 
-    const HandleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
     }
 
-    const HandleDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
         setDescription(e.target.value);
     }
 
-    const HandleEstTime = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleEstTime = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEstTime(e.target.value);
     }
 
-    const HandleReview = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleReview = (e: React.ChangeEvent<HTMLInputElement>) => {
         setReview(e.target.value);
     }
-    const HandleTimeSpent = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleTimeSpent = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTimeSpent(e.target.value);
     }
 
 
-    const HandlePriorityChange = (e: any) => {
+    const handlePriorityChange = (e: any) => {
         if (e.target.value == "High") {
             setIsUrgent(true);
         } else {
@@ -82,7 +82,7 @@ const OpenFormDialogBox = () => {
         setPriority(e.target.value);
     }
 
-    const HandleStatusChange = (e: any) => {
+    const handleStatusChange = (e: any) => {
         const status = e.target.value;
         if (status == "Close") {
             setIsClosed(true);
@@ -91,11 +91,11 @@ const OpenFormDialogBox = () => {
         setStatus(status);
     }
 
-    const HandleCloseDialog = () => {
+    const handleCloseDialog = () => {
         dispatch(closeFormDialogBox());
     }
 
-    const HandleSubmit = () => {
+    const handleSubmit = () => {
         const newTask: ITask = {
             id: (Number(tasksCount) + 1).toString(),
             title: title,
@@ -119,7 +119,7 @@ const OpenFormDialogBox = () => {
 
     return (
         <div>
-            <Dialog open={openDialog} onClose={HandleCloseDialog}>
+            <Dialog open={openDialog} onClose={handleCloseDialog}>
                 <DialogTitle sx={{
                     margin: 2,
                     display: 'flex',
@@ -144,7 +144,7 @@ const OpenFormDialogBox = () => {
                             variant="outlined"
                             fullWidth
                             style={{marginTop: '5px'}}
-                            onChange={HandleTitle}/>
+                            onChange={handleTitle}/>
                         {errors.title && (
                             <p style={{color: 'red'}}>{errors.title.message as string}</p>
                         )}
@@ -159,20 +159,20 @@ const OpenFormDialogBox = () => {
                             label="Description"
                             variant="outlined"
                             fullWidth
-                            style={{marginTop: '3px'}}
-                            onChange={HandleDescription}/>
+                            style={{marginTop: '5px'}}
+                            onChange={handleDescription}/>
                         {errors.description && (
                             <p style={{color: 'red'}}>{errors.description.message as string}</p>
                         )}
 
 
-                        <FormControl fullWidth style={{marginTop: '3px'}}>
+                        <FormControl fullWidth style={{marginTop: '5px'}}>
                             <InputLabel>Status</InputLabel>
                             <Select
                                 {...register('status', {required: true})}
                                 value={status}
                                 label="Status"
-                                onChange={HandleStatusChange}
+                                onChange={handleStatusChange}
                                 name="status"
                                 variant="outlined"
                             >
@@ -184,13 +184,13 @@ const OpenFormDialogBox = () => {
                         </FormControl>
 
 
-                        <FormControl fullWidth style={{marginTop: '3px'}}>
+                        <FormControl fullWidth style={{marginTop: '5px'}}>
                             <InputLabel>Priority</InputLabel>
                             <Select
                                 {...register('priority', {required: true})}
                                 value={priority}
                                 label="Priority"
-                                onChange={HandlePriorityChange}
+                                onChange={handlePriorityChange}
                                 name="priority"
                                 variant="outlined"
                             >
@@ -212,8 +212,8 @@ const OpenFormDialogBox = () => {
                             label="Estimated Time"
                             variant="outlined"
                             fullWidth
-                            style={{marginTop: '3px'}}
-                            onChange={HandleEstTime}/>
+                            style={{marginTop: '5px', marginBottom:'7px'}}
+                            onChange={handleEstTime}/>
                         {errors.estimatedTime && (
                             <p style={{color: 'red'}}>{errors.estimatedTime.message as string}</p>
                         )}
@@ -239,8 +239,8 @@ const OpenFormDialogBox = () => {
                                 label="Review"
                                 variant="outlined"
                                 fullWidth
-                                style={{marginTop: '3px'}}
-                                onChange={HandleReview}/>}
+                                style={{marginTop: '5px'}}
+                                onChange={handleReview}/>}
                         {errors.review && (
                             <p style={{color: 'red'}}>{errors.review.message as string}</p>
                         )}
@@ -256,8 +256,8 @@ const OpenFormDialogBox = () => {
                                 label="Time Spent"
                                 variant="outlined"
                                 fullWidth
-                                style={{marginTop: '3px'}}
-                                onChange={HandleTimeSpent}/>}
+                                style={{marginTop: '5px'}}
+                                onChange={handleTimeSpent}/>}
                         {errors.timeSpent && (
                             <p style={{color: 'red'}}>{errors.timeSpent.message as string}</p>
                         )}
@@ -271,14 +271,14 @@ const OpenFormDialogBox = () => {
                     justifyContent: 'center',
                     marginBottom: '5px'
                 }}>
-                    <Button onClick={HandleSubmit} style={{
+                    <Button onClick={handleSubmit} style={{
                         background: "#228B22",
                         color: "white",
                         width: "100px",
                         height: "50px"
                     }}>Add</Button>
 
-                    <Button onClick={HandleCloseDialog}
+                    <Button onClick={handleCloseDialog}
                             style={{
                                 background: "#FF0000",
                                 color: "white",
