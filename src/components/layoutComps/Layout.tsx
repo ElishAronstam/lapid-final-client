@@ -1,13 +1,13 @@
-import TodoTableContainer from '../tableComps/TodoTableContainer';
+import TasksTableContainer from '../tableComps/TasksTableContainer';
 import AddButton from "../menuBarComps/AddButton";
-import Header from "../generalComps/Header";
+import Header from "./header/Header";
 import OpenFormDialogBox from "../dialogComps/OpenFormDialogBox";
 import OpenReadDialogBox from "../dialogComps/OpenReadDialogBox";
 import Search from "../menuBarComps/Search";
 import QuickFilters from "../menuBarComps/QuickFilters";
 
 
-const AppTodo = () => {
+const Layout = () => {
 
     return (
         <div
@@ -22,7 +22,7 @@ const AppTodo = () => {
             <Header/>
             <Search/>
             <QuickFilters/>
-            <TodoTableContainer/>
+            <TasksTableContainer/>
             <AddButton/>
 
             {/* Prompted Components*/}
@@ -33,4 +33,4 @@ const AppTodo = () => {
     )
 }
 
-export default AppTodo;
+export default Layout;

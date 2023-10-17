@@ -1,19 +1,19 @@
 import {TableBody} from "@mui/material";
 import ITask from "../../types/ITask";
-import TodoItem from "../todoComps/TodoItem";
+import TaskItem from "../taskComps/TaskItem";
 
 interface IProps {
     tasks: ITask[];
 }
 
 
-const TodoTable = (props: IProps) => {
+const TasksTable = (props: IProps) => {
 
     return (<TableBody>
             {props.tasks.map((task: ITask, index: number) => {
-                return <TodoItem key={index} task={task}></TodoItem>
+                return <TaskItem key={index} task={task} />
             })}
         </TableBody>);
 }
 
-export default TodoTable;
+export default TasksTable;

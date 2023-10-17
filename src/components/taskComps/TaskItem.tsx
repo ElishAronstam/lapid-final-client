@@ -10,7 +10,7 @@ interface ITaskProps {
     task: ITask;
 }
 
-const TodoItem = (props: ITaskProps) => {
+const TaskItem = (props: ITaskProps) => {
     const task = props.task;
     const {deleteTaskFromStore, viewTaskDetails} = useActionHook();
 
@@ -73,4 +73,4 @@ const TodoItem = (props: ITaskProps) => {
     )
 }
 
-export default TodoItem;
+export default TaskItem;

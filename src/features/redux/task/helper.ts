@@ -57,6 +57,7 @@ const tasksFromFile = () => {
 export const filterTasks = (filterByOpenStatus: boolean, filterByHighPriority: boolean, query: string) => {
 
     let filteredTasks = getInitTasks();
+    // Once i have the server will filter the tasks that are in the server side meaning will include the new ones, here we don't add to mock
 
     if (query != "") {
         filteredTasks = filteredTasks.filter((task: ITask) => {

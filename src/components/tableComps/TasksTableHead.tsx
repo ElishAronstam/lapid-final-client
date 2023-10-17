@@ -4,7 +4,7 @@ interface IHeadProps {
     titles: string[];
 }
 
-const TodoTableHead = (props: IHeadProps) => {
+const TasksTableHead = (props: IHeadProps) => {
     return (<TableHead>
         <TableRow>
             {props.titles.map((category: string) => {
@@ -17,4 +17,4 @@ const TodoTableHead = (props: IHeadProps) => {
 
 }
 
-export default TodoTableHead;
+export default TasksTableHead;
