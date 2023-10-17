@@ -1,7 +1,7 @@
 import {Button, styled} from '@mui/material'
 import React from 'react'
 import {useDispatch} from "react-redux";
-import {openFormDialogBox} from "../../features/task/taskSlice";
+import {openFormDialogBox} from "../../features/redux/task/taskSlice";
 import {deepPurple, purple} from "@mui/material/colors";
 
 export default function AddButton() {

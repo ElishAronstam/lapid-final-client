@@ -1,4 +1,4 @@
-import ITask from "../../types/ITask";
+import ITask from "../../../types/ITask";
 import {useSelector} from "react-redux";
 import {selectTasks} from "../task/taskSelectors";
 

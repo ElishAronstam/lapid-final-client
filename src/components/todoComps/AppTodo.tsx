@@ -21,9 +21,7 @@ const AppTodo = () => {
             {/*Main Components*/}
             <Header/>
             <Search/>
-            {/*Send filter states and sets*/}
             <QuickFilters/>
-            {/*send query and filter*/}
             <TodoTableContainer/>
             <AddButton/>
 

@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {getInitTasks} from "./helper";
-import ITask from "../../types/ITask";
+import ITask from "../../../types/ITask";
 
 
 export const taskSlice = createSlice({
@@ -12,6 +12,7 @@ export const taskSlice = createSlice({
         openReadDialogBox: false,
         filterTaskByOpenStatus: false,
         filterTaskByHighPriority: false,
+        searchQuery: "",
     },
     reducers: {
         addTask: (state, action:PayloadAction<ITask>) => {
@@ -23,19 +24,6 @@ export const taskSlice = createSlice({
                 (task) => task.id !== action.payload
             )
         },
-
-        // updateTask:(state, action) {
-        //     let newTodoList: ITask[] = state.tasks;
-        //     newTodoList = newTodoList.map(task => {
-        //         if (task.id === action.payload.id) {
-        //             return action.payload;
-        //         } else {
-        //             return task;
-        //         }
-        //     });
-        //
-        //     state.tasks = newTodoList;
-        // },
 
         setTasks: (state, action: PayloadAction<ITask[]>) => {
             state.tasks = action.payload;
@@ -67,7 +55,9 @@ export const taskSlice = createSlice({
         toggleFilterByStatus: (state) => {
             state.filterTaskByOpenStatus = !state.filterTaskByOpenStatus;
         },
-
+        setSearchQuery:(state,  action:PayloadAction<string>) => {
+            state.searchQuery = action.payload;
+       }
     }
 });
 
@@ -82,7 +72,8 @@ export const {
     closeReadDialogBox,
     setTasks,
     toggleFilterByPriority,
-    toggleFilterByStatus
+    toggleFilterByStatus,
+    setSearchQuery
 } = taskSlice.actions;
 
 export default taskSlice.reducer;

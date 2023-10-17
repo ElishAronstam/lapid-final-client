@@ -2,7 +2,7 @@ import ITask from "../../types/ITask";
 import {IconButton, TableCell, TableRow, Tooltip} from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import NoteIcon from '@mui/icons-material/Note';
-import useActionHook from "../../features/customHooks/useActionHook";
+import useActionHook from "../../features/redux/customHooks/useActionHook";
 import ConfirmationDialog from "../dialogComps/ConfirmationDialog";
 import {useState} from "react";
 

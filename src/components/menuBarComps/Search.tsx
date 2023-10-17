@@ -1,37 +1,28 @@
 import {IconButton, InputBase, Paper} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React, {useEffect, useState} from "react";
-import useGetDataHook from "../../features/customHooks/useGetDataHook";
-import {setTasks} from "../../features/task/taskSlice";
-import ITask from "../../types/ITask";
+import useGetDataHook from "../../features/redux/customHooks/useGetDataHook";
+import {setSearchQuery} from "../../features/redux/task/taskSlice";
 import {useDispatch} from "react-redux";
-import {getInitTasks} from "../../features/task/helper";
+import {toggleFilterAction} from "../../features/redux/actions";
 
 
 const Search = () => {
     const [query, setQuery] = useState("");
-    const tasks = useGetDataHook();
     const dispatch = useDispatch();
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setQuery(e.target.value);
     }
 
-    const handleSubmit=(e:any)=>{
+    const handleSubmit = (e: any) => {
         e.preventDefault();
     }
 
 
     useEffect(() => {
-        if (query === "") {
-            const filtered=getInitTasks();
-            dispatch(setTasks(filtered));
-        } else {
-            const filtered=tasks.filter((task: ITask) => {
-              return task.title.toString().toLowerCase().includes((query.toLowerCase()));
-            } );
-            dispatch(setTasks(filtered));
-        }
+        dispatch(setSearchQuery(query));
+        dispatch(toggleFilterAction());
     }, [query]);
 
 

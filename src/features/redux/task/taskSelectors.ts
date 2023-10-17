@@ -1,4 +1,4 @@
-import {RootState} from "../../App";
+import {RootState} from "../store";
 import {createSelector} from "@reduxjs/toolkit";
 
 export const selectTasks = (state: RootState) => state.taskSlice.tasks;

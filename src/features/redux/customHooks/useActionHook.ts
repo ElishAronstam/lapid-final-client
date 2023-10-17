@@ -1,5 +1,5 @@
 import {useDispatch} from "react-redux";
-import ITask from "../../types/ITask";
+import ITask from "../../../types/ITask";
 import {addTask, delSingleTask, openReadDialogBox, updateCurrentTaskId} from '../task/taskSlice';
 
 const useActionHook = () => {

@@ -17,14 +17,14 @@ import {useDispatch, useSelector} from 'react-redux';
 import {
     openFormDialogBoxSelector,
     selectItemCount,
-} from '../../features/task/taskSelectors'
-import {closeFormDialogBox} from "../../features/task/taskSlice"
+} from '../../features/redux/task/taskSelectors'
+import {closeFormDialogBox} from "../../features/redux/task/taskSlice"
 import {DesktopDateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import dayjs, {Dayjs} from 'dayjs';
 import utc from "dayjs/plugin/utc";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import ITask from "../../types/ITask";
-import useActionHook from "../../features/customHooks/useActionHook";
+import useActionHook from "../../features/redux/customHooks/useActionHook";
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

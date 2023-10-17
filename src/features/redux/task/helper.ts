@@ -1,5 +1,5 @@
-import ITask from "../../types/ITask";
-import data from "../../assets/mock.json";
+import ITask from "../../../types/ITask";
+import data from "../../../assets/mock.json";
 
 export const getInitTasks = () => {
     const tasks = tasksFromFile();
@@ -49,7 +49,28 @@ export const getInitTasks = () => {
     console.log("tasks objects", tasks_objects);
     return tasks_objects;
 }
+
 const tasksFromFile = () => {
     return data.tasks;
 }
 
+export const filterTasks = (filterByOpenStatus: boolean, filterByHighPriority: boolean, query: string) => {
+
+    let filteredTasks = getInitTasks();
+
+    if (query != "") {
+        filteredTasks = filteredTasks.filter((task: ITask) => {
+            return task.title.toString().toLowerCase().includes((query.toLowerCase()));
+        });
+    }
+
+    if (filterByOpenStatus) {
+        filteredTasks = filteredTasks.filter((task) => task.status === "Open");
+    }
+    if (filterByHighPriority) {
+        filteredTasks = filteredTasks.filter((task) => task.priority === "High");
+    }
+
+    return filteredTasks;
+
+}

@@ -1,7 +1,7 @@
 import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, styled} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {closeReadDialogBox, updateCurrentTaskId} from "../../features/task/taskSlice";
-import {openReadDialogBoxSelector, selectCurrentTask} from "../../features/task/taskSelectors";
+import {closeReadDialogBox, updateCurrentTaskId} from "../../features/redux/task/taskSlice";
+import {openReadDialogBoxSelector, selectCurrentTask} from "../../features/redux/task/taskSelectors";
 import React from "react";
 
 const OpenReadDialogBox = () => {
