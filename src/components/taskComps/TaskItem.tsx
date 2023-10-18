@@ -18,7 +18,7 @@ const TaskItem = (props: ITaskProps) => {
     const task = props.task;
     const {deleteTaskFromStore, viewTaskDetails} = useActionHook();
 
-    const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+    const [isConfirmationOpen, setIsConfirmationOpen] = useState<boolean>(false);
 
     const handleDeleteItem = (confirmation: boolean) => {
         if (confirmation) {
@@ -52,8 +52,8 @@ const TaskItem = (props: ITaskProps) => {
             default:
                 return null;
         }
+    }; // TODO: move to util
 
-    };
     return (
         <TableRow>
             <TableCell>

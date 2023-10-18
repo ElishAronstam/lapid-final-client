@@ -2,8 +2,8 @@ import ITask from "../../../types/ITask";
 import data from "../../../assets/mock.json";
 
 export const getInitTasks = () => {
-    const tasks = tasksFromFile();
-    let tasks_objects: ITask[] = [];
+    const tasks = getTasksFromFile();
+    let tasksObjects: ITask[] = [];
 
     tasks.forEach(task => {
         if (task.status === "Close") {
@@ -20,7 +20,7 @@ export const getInitTasks = () => {
                 endTime: task.endTime ? task.endTime : undefined,
             };
 
-            tasks_objects.push(newTask);
+            tasksObjects.push(newTask);
         } else if (task.priority === "High") {
             const newTask: ITask = {
                 id: task.id,
@@ -32,7 +32,7 @@ export const getInitTasks = () => {
                 endTime: task.endTime ? task.endTime : undefined,
             };
 
-            tasks_objects.push(newTask);
+            tasksObjects.push(newTask);
         } else {
             const newTask: ITask = {
                 id: task.id,
@@ -43,15 +43,15 @@ export const getInitTasks = () => {
                 priority: task.priority,
             };
 
-            tasks_objects.push(newTask);
+            tasksObjects.push(newTask);
         }
 
     });
 
-    return tasks_objects;
+    return tasksObjects;
 };
 
-const tasksFromFile = () => {
+const getTasksFromFile = () => {
     return data.tasks;
 };
 

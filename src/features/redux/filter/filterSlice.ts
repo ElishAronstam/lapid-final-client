@@ -1,6 +1,4 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import ITask from "../../../types/ITask";
-import {taskSlice} from "../task/taskSlice";
 
 export const filterSlice = createSlice({
     name: 'filters',

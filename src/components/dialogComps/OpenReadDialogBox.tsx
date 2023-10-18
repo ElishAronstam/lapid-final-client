@@ -2,16 +2,14 @@ import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogT
 import {useDispatch, useSelector} from "react-redux";
 import {closeReadDialogBox, updateCurrentTaskId} from "../../features/redux/task/taskSlice";
 import {openReadDialogBoxSelector, selectCurrentTask} from "../../features/redux/task/taskSelectors";
-import React from "react";
+
+const StyledDialogContentText = styled(DialogContentText)(({theme}) => ({
+    marginBottom: theme.spacing(1),
+}));
 
 const OpenReadDialogBox = () => {
     const openDialog = useSelector(openReadDialogBoxSelector);
     const task = useSelector(selectCurrentTask);
-
-    const StyledDialogContentText = styled(DialogContentText)(({theme}) => ({
-        marginBottom: theme.spacing(1),
-    }));
-
 
     const dispatch = useDispatch();
 
@@ -51,7 +49,8 @@ const OpenReadDialogBox = () => {
 
                 {task.timeSpent && <StyledDialogContentText>
                     <strong>Time Spent:</strong> {task.timeSpent}
-                </StyledDialogContentText>}
+                </StyledDialogContentText>
+                }
 
 
             </DialogContent>

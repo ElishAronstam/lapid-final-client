@@ -1,6 +1,6 @@
 import TasksTable from "./TasksTable";
 import TasksTableHead from "./TasksTableHead";
-import {Paper, Table, TableContainer} from "@mui/material";
+import {Paper, Table, TableContainer, Typography, TypographyVariant} from "@mui/material";
 import useGetDataHook from "../../features/redux/customHooks/useGetDataHook";
 import {useSelector} from "react-redux";
 import {selectItemCount} from "../../features/redux/task/taskSelectors";
@@ -11,8 +11,8 @@ const TasksTableContainer = () => {
     const tasks = useGetDataHook();
 
     return (<>
-        <h2>There are currently: {tasksCount} Tasks</h2>
-        <TableContainer component={Paper} sx={{margin: 4, maxWidth: 1000}}>
+        <Typography variant={'h2'}>There are currently: {tasksCount} Tasks</Typography>
+        <TableContainer component={Paper} sx={{margin: 4, maxWidth: 1000}}> // TODO: move sx to const
             <Table>
                 <TasksTableHead titles={titles}/>
                 <TasksTable tasks={tasks}/>

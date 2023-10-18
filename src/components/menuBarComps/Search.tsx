@@ -7,7 +7,7 @@ import {toggleFilterAction} from "../../features/redux/actions";
 
 
 const Search = () => {
-    const [query, setQuery] = useState("");
+    const [query, setQuery] = useState(""); //TODO: change name to input
     const dispatch = useDispatch();
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {

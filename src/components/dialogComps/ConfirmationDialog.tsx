@@ -11,13 +11,12 @@ const ConfirmationDialog = (props: IConfirmationDialogProps) => {
 
     const handleConfirm = (confirmation: boolean) => {
         setIsOpen(false);
-        props.onConfirm(confirmation); // Pass the result (true for "Yes", false for "No") to the callback
+        props.onConfirm(confirmation);
     };
 
     return (
         <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
             <DialogTitle>
-                {" "}
                 <Typography variant="h4">Delete Item</Typography>
             </DialogTitle>
             <DialogContent>

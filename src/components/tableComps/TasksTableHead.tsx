@@ -4,10 +4,10 @@ interface IHeadProps {
     titles: string[];
 };
 
-const TasksTableHead = (props: IHeadProps) => {
+const TasksTableHead = ({titles}: IHeadProps) => {
     return (<TableHead>
         <TableRow>
-            {props.titles.map((category: string) => {
+            {titles.map((category: string) => {
                 return <TableCell
                     key={category} align="center"> {category}
                 </TableCell>

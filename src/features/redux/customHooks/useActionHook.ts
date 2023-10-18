@@ -10,7 +10,7 @@ const useActionHook = () => {
     };
 
     const deleteTaskFromStore = (taskId: string) => {
-        dispatch(delSingleTask(taskId));
+        dispatch(delSingleTask(taskId)); //TODO: change name to delete
     };
 
     const viewTaskDetails = (taskId: string) => {

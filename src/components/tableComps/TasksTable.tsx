@@ -3,7 +3,7 @@ import ITask from "../../types/ITask";
 import TaskItem from "../taskComps/TaskItem";
 
 interface IProps {
-    tasks: ITask[];
+    tasks: Array<ITask>;
 }
 
 
