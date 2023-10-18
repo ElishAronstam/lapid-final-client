@@ -5,6 +5,10 @@ import NoteIcon from '@mui/icons-material/Note';
 import useActionHook from "../../features/redux/customHooks/useActionHook";
 import ConfirmationDialog from "../dialogComps/ConfirmationDialog";
 import {useState} from "react";
+import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
+import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 
 interface ITaskProps {
     task: ITask;
@@ -16,19 +20,47 @@ const TaskItem = (props: ITaskProps) => {
 
     const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
 
-    const HandleDeleteItem = (confirmation: boolean) => {
+    const handleDeleteItem = (confirmation: boolean) => {
         if (confirmation) {
             deleteTaskFromStore(task.id);
         }
         setIsConfirmationOpen(false);
-    }
+    };
 
-    return (<TableRow>
+    const getPriorityIcon = (priority: string) => {
+        switch (priority) {
+            case 'High':
+                return <KeyboardDoubleArrowUpIcon style={{color: 'red', fontSize: '2rem'}}/>;
+            case 'Medium':
+                return <KeyboardDoubleArrowDownIcon style={{color: 'green', fontSize: '2rem'}}/>;
+            case 'Low':
+                return <ArrowDownwardIcon/>;
+            default:
+                return null;
+        }
+
+    };
+
+    const getTypeIcon = (status: string) => {
+        switch (status) {
+            case 'Open':
+                return <EditCalendarIcon style={{color: 'black'}}/>;
+            case 'In progress':
+                return <EditCalendarIcon style={{color: 'red'}}/>;
+            case 'Close':
+                return <ArrowDownwardIcon style={{color: 'green'}}/>;
+            default:
+                return null;
+        }
+
+    };
+    return (
+        <TableRow>
             <TableCell>
-                {task.id}
+                {getTypeIcon(task.status)}
             </TableCell>
             <TableCell>
-                {task.priority}
+                {getPriorityIcon(task.priority)}
             </TableCell>
             <TableCell>
                 {task.title}
@@ -65,12 +97,11 @@ const TaskItem = (props: ITaskProps) => {
                 </Tooltip>
             </TableCell>
             {isConfirmationOpen && (<ConfirmationDialog
-                    TaskName={task.title}
-                    onConfirm={HandleDeleteItem}
-                />)}
+                TaskName={task.title}
+                onConfirm={handleDeleteItem}
+            />)}
         </TableRow>
-
-    )
-}
+    );
+};
 
 export default TaskItem;

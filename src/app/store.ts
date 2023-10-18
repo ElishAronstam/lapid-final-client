@@ -1,14 +1,12 @@
 import {createEpicMiddleware} from "redux-observable";
 import {configureStore} from "@reduxjs/toolkit";
-import toggleFiltersEpic from "./toggleFiltersEpic";
-import taskReducer from "./task/taskSlice";
+import toggleFiltersEpic from "../features/redux/toggleFiltersEpic";
+import rootReducers  from "../features/redux/rootReducers";
 
 const epicMiddleware = createEpicMiddleware();
 
 export const myStore = configureStore({
-    reducer: {
-        taskSlice:taskReducer
-    },
+    reducer: rootReducers,
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware().concat(epicMiddleware) // Apply middleware correctly
 });

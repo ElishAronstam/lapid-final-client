@@ -45,14 +45,15 @@ export const getInitTasks = () => {
 
             tasks_objects.push(newTask);
         }
-    })
-    console.log("tasks objects", tasks_objects);
+
+    });
+
     return tasks_objects;
-}
+};
 
 const tasksFromFile = () => {
     return data.tasks;
-}
+};
 
 export const filterTasks = (filterByOpenStatus: boolean, filterByHighPriority: boolean, query: string) => {
 
@@ -65,13 +66,16 @@ export const filterTasks = (filterByOpenStatus: boolean, filterByHighPriority: b
         });
     }
 
+
     if (filterByOpenStatus) {
         filteredTasks = filteredTasks.filter((task) => task.status === "Open");
     }
+
+
     if (filterByHighPriority) {
         filteredTasks = filteredTasks.filter((task) => task.priority === "High");
     }
 
-    return filteredTasks;
 
-}
+    return filteredTasks;
+};

@@ -7,16 +7,16 @@ const useActionHook = () => {
 
     const addTaskToStore = (task: ITask) => {
         dispatch(addTask(task));
-    }
+    };
 
     const deleteTaskFromStore = (taskId: string) => {
         dispatch(delSingleTask(taskId));
-    }
+    };
 
     const viewTaskDetails = (taskId: string) => {
         dispatch(updateCurrentTaskId(taskId));
         dispatch(openReadDialogBox());
-    }
+    };
 
     return {addTaskToStore, deleteTaskFromStore, viewTaskDetails};
 }

@@ -2,7 +2,7 @@ import {TableCell, TableHead, TableRow} from "@mui/material";
 
 interface IHeadProps {
     titles: string[];
-}
+};
 
 const TasksTableHead = (props: IHeadProps) => {
     return (<TableHead>
@@ -13,8 +13,7 @@ const TasksTableHead = (props: IHeadProps) => {
                 </TableCell>
             })}
         </TableRow>
-    </TableHead>)
-
-}
+    </TableHead>);
+};
 
 export default TasksTableHead;

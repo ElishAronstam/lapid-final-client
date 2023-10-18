@@ -6,6 +6,6 @@ const useGetDataHook = () => {
     const tasks: ITask[] = useSelector(selectTasks);
 
     return tasks;
-}
+};
 
 export default useGetDataHook;

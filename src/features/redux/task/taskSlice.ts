@@ -2,7 +2,6 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {getInitTasks} from "./helper";
 import ITask from "../../../types/ITask";
 
-
 export const taskSlice = createSlice({
     name: 'tasks',
     initialState: {
@@ -10,16 +9,13 @@ export const taskSlice = createSlice({
         currentTaskId: "",
         openFormDialogBox: false,
         openReadDialogBox: false,
-        filterTaskByOpenStatus: false,
-        filterTaskByHighPriority: false,
-        searchQuery: "",
     },
     reducers: {
-        addTask: (state, action:PayloadAction<ITask>) => {
+        addTask: (state, action: PayloadAction<ITask>) => {
             state.tasks.push(action.payload);
         },
 
-        delSingleTask: (state, action:PayloadAction<string>) => {
+        delSingleTask: (state, action: PayloadAction<string>) => {
             state.tasks = state.tasks.filter(
                 (task) => task.id !== action.payload
             )
@@ -29,7 +25,7 @@ export const taskSlice = createSlice({
             state.tasks = action.payload;
         },
 
-        updateCurrentTaskId: (state, action:PayloadAction<string>) => {
+        updateCurrentTaskId: (state, action: PayloadAction<string>) => {
             state.currentTaskId = action.payload;
         },
         openFormDialogBox: (state) => {
@@ -47,17 +43,6 @@ export const taskSlice = createSlice({
         closeReadDialogBox: (state) => {
             state.openReadDialogBox = false;
         },
-
-        toggleFilterByPriority: (state) => {
-            state.filterTaskByHighPriority = !state.filterTaskByHighPriority;
-        },
-
-        toggleFilterByStatus: (state) => {
-            state.filterTaskByOpenStatus = !state.filterTaskByOpenStatus;
-        },
-        setSearchQuery:(state,  action:PayloadAction<string>) => {
-            state.searchQuery = action.payload;
-       }
     }
 });
 
@@ -71,9 +56,6 @@ export const {
     openReadDialogBox,
     closeReadDialogBox,
     setTasks,
-    toggleFilterByPriority,
-    toggleFilterByStatus,
-    setSearchQuery
 } = taskSlice.actions;
 
 export default taskSlice.reducer;

@@ -17,19 +17,17 @@ export default function AddButton() {
         backgroundColor: purple[500],
         color: purple[50],
         '&:hover': {
-            backgroundColor: deepPurple[50],
-            color: deepPurple[600],
-            border: `2px solid ${deepPurple[600]}`,
+            backgroundColor: deepPurple[50], color: deepPurple[600], border: `2px solid ${deepPurple[600]}`,
         },
     }));
 
     return (<>
-            <StyledButton
-                onClick={() => {
-                    dispatch(openFormDialogBox());
-                }}
-                aria-label="todoInput">
-                Create
-            </StyledButton>
-        </>)
-}
+        <StyledButton
+            onClick={() => {
+                dispatch(openFormDialogBox());
+            }}
+            aria-label="todoInput">
+            Create
+        </StyledButton>
+    </>)
+};

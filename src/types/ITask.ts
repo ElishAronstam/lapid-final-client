@@ -8,4 +8,4 @@ export default interface ITask {
     review?: string;
     timeSpent?: string;
     endTime?: string;
-}
+};

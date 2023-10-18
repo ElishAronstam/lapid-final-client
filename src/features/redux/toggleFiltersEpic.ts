@@ -8,7 +8,7 @@ const toggleFiltersEpic: Epic = (action$, state$) =>
     action$.pipe(
         ofType(TOGGLE_FILTER),
         map(() => {
-            const filteredTasks = filterTasks(state$.value.taskSlice.filterTaskByOpenStatus, state$.value.taskSlice.filterTaskByHighPriority, state$.value.taskSlice.searchQuery);
+            const filteredTasks = filterTasks(state$.value.filterSlice.filterTaskByOpenStatus, state$.value.filterSlice.filterTaskByHighPriority, state$.value.filterSlice.searchQuery);
             return setTasks(filteredTasks);
         })
     );

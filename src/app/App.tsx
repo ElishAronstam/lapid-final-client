@@ -1,7 +1,7 @@
 import React from 'react';
 import {Provider} from 'react-redux';
-import Layout from "./components/layoutComps/Layout";
-import {myStore} from "./features/redux/store";
+import Layout from "../components/layoutComps/Layout";
+import {myStore} from "./store";
 
 function App() {
     return (
@@ -9,6 +9,6 @@ function App() {
             <Layout/>
         </Provider>
     );
-}
+};
 
 export default App;

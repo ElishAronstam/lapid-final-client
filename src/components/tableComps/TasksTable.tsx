@@ -10,10 +10,10 @@ interface IProps {
 const TasksTable = (props: IProps) => {
 
     return (<TableBody>
-            {props.tasks.map((task: ITask, index: number) => {
-                return <TaskItem key={index} task={task} />
-            })}
-        </TableBody>);
-}
+        {props.tasks.map((task: ITask, index: number) => {
+            return <TaskItem key={index} task={task}/>
+        })}
+    </TableBody>);
+};
 
 export default TasksTable;

@@ -1,8 +1,7 @@
 import {IconButton, InputBase, Paper} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React, {useEffect, useState} from "react";
-import useGetDataHook from "../../features/redux/customHooks/useGetDataHook";
-import {setSearchQuery} from "../../features/redux/task/taskSlice";
+import {setSearchQuery} from "../../features/redux/filter/filterSlice";
 import {useDispatch} from "react-redux";
 import {toggleFilterAction} from "../../features/redux/actions";
 
@@ -13,11 +12,11 @@ const Search = () => {
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         setQuery(e.target.value);
-    }
+    };
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
-    }
+    };
 
 
     useEffect(() => {
@@ -53,6 +52,6 @@ const Search = () => {
         </form>
     );
 
-}
+};
 
 export default Search;

@@ -1,7 +1,7 @@
 import {Button, styled, Typography} from "@mui/material";
 import {deepPurple} from "@mui/material/colors"
 import {useDispatch} from "react-redux";
-import {toggleFilterByPriority, toggleFilterByStatus} from "../../features/redux/task/taskSlice";
+import {toggleFilterByPriority, toggleFilterByStatus} from "../../features/redux/filter/filterSlice";
 import {toggleFilterAction} from "../../features/redux/actions";
 
 const QuickFilters = () => {
@@ -35,12 +35,14 @@ const QuickFilters = () => {
         dispatch(toggleFilterAction())
     };
 
-    return (<div>
+    return (
+        <div>
             <StyledTopography>
                 QUICK FILTERS:
             </StyledTopography>
             <StyledButton onClick={handleFilterByOpen}> Open Tasks </StyledButton>
             <StyledButton onClick={handleFilterByPriority}> High Priority Tasks </StyledButton>
         </div>)
-}
+};
+
 export default QuickFilters;

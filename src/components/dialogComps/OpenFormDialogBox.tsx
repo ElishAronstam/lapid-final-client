@@ -14,10 +14,7 @@ import {
 import {useForm} from 'react-hook-form';
 import React, {useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import {
-    openFormDialogBoxSelector,
-    selectItemCount,
-} from '../../features/redux/task/taskSelectors'
+import {openFormDialogBoxSelector, selectItemCount,} from '../../features/redux/task/taskSelectors'
 import {closeFormDialogBox} from "../../features/redux/task/taskSlice"
 import {DesktopDateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import dayjs, {Dayjs} from 'dayjs';
@@ -55,22 +52,23 @@ const OpenFormDialogBox = () => {
 
     const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTitle(e.target.value);
-    }
+    };
 
     const handleDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
         setDescription(e.target.value);
-    }
+    };
 
     const handleEstTime = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEstTime(e.target.value);
-    }
+    };
 
     const handleReview = (e: React.ChangeEvent<HTMLInputElement>) => {
         setReview(e.target.value);
-    }
+    };
+
     const handleTimeSpent = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTimeSpent(e.target.value);
-    }
+    };
 
 
     const handlePriorityChange = (e: any) => {
@@ -80,7 +78,7 @@ const OpenFormDialogBox = () => {
             setIsUrgent(false);
         }
         setPriority(e.target.value);
-    }
+    };
 
     const handleStatusChange = (e: any) => {
         const status = e.target.value;
@@ -89,11 +87,11 @@ const OpenFormDialogBox = () => {
             setIsUrgent(false);
         }
         setStatus(status);
-    }
+    };
 
     const handleCloseDialog = () => {
         dispatch(closeFormDialogBox());
-    }
+    };
 
     const handleSubmit = () => {
         const newTask: ITask = {
@@ -114,7 +112,7 @@ const OpenFormDialogBox = () => {
             position: toast.POSITION.TOP_RIGHT
         });
 
-    }
+    };
 
 
     return (
@@ -212,7 +210,7 @@ const OpenFormDialogBox = () => {
                             label="Estimated Time"
                             variant="outlined"
                             fullWidth
-                            style={{marginTop: '5px', marginBottom:'7px'}}
+                            style={{marginTop: '5px', marginBottom: '7px'}}
                             onChange={handleEstTime}/>
                         {errors.estimatedTime && (
                             <p style={{color: 'red'}}>{errors.estimatedTime.message as string}</p>
@@ -290,7 +288,6 @@ const OpenFormDialogBox = () => {
             <ToastContainer/>
         </div>
     )
-
-}
+};
 
 export default OpenFormDialogBox;
