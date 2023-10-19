@@ -1,6 +1,7 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {getInitTasks} from "./helper";
-import ITask from "../../../types/ITask";
+import Task from "../../../types/Task";
+import {TOGGLE_FILTER} from "../actions";
 
 export const taskSlice = createSlice({
     name: 'tasks',
@@ -9,19 +10,20 @@ export const taskSlice = createSlice({
         currentTaskId: "",
         openFormDialogBox: false,
         openReadDialogBox: false,
+        openConfirmationDialogBox:false
     },
     reducers: {
-        addTask: (state, action: PayloadAction<ITask>) => {
+        addTask: (state, action: PayloadAction<Task>) => {
             state.tasks.push(action.payload);
         },
 
-        delSingleTask: (state, action: PayloadAction<string>) => {
+        deleteSingleTask: (state, action: PayloadAction<string>) => {
             state.tasks = state.tasks.filter(
                 (task) => task.id !== action.payload
             )
         },
 
-        setTasks: (state, action: PayloadAction<ITask[]>) => {
+        setTasks: (state, action: PayloadAction<Task[]>) => {
             state.tasks = action.payload;
         },
 
@@ -35,7 +37,6 @@ export const taskSlice = createSlice({
         closeFormDialogBox: (state) => {
             state.openFormDialogBox = false;
         },
-
         openReadDialogBox: (state) => {
             state.openReadDialogBox = true;
         },
@@ -43,19 +44,29 @@ export const taskSlice = createSlice({
         closeReadDialogBox: (state) => {
             state.openReadDialogBox = false;
         },
+        openConfirmationDialogBox: (state) => {
+            state.openConfirmationDialogBox = true;
+        },
+
+        closeConfirmationDialogBox: (state) => {
+            state.openConfirmationDialogBox = false;
+        },
+
     }
 });
 
 
 export const {
     addTask,
-    delSingleTask,
+    deleteSingleTask,
     updateCurrentTaskId,
     openFormDialogBox,
     closeFormDialogBox,
-    openReadDialogBox,
-    closeReadDialogBox,
     setTasks,
+    closeReadDialogBox,
+    openReadDialogBox,
+    openConfirmationDialogBox,
+    closeConfirmationDialogBox
 } = taskSlice.actions;
 
 export default taskSlice.reducer;

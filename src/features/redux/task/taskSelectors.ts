@@ -12,3 +12,5 @@ export const selectCurrentTask = (state: RootState) => {
 export const openFormDialogBoxSelector = (state: RootState) => state.taskSlice.openFormDialogBox;
 
 export const openReadDialogBoxSelector = (state: RootState) => state.taskSlice.openReadDialogBox;
+
+export const openConfirmationDialogBoxSelector = (state: RootState) => state.taskSlice.openConfirmationDialogBox;

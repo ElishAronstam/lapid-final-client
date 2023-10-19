@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {TOGGLE_FILTER} from "../actions";
 
 export const filterSlice = createSlice({
     name: 'filters',

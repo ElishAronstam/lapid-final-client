@@ -8,7 +8,7 @@ const epicMiddleware = createEpicMiddleware();
 export const myStore = configureStore({
     reducer: rootReducers,
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(epicMiddleware) // Apply middleware correctly
+        getDefaultMiddleware().concat(epicMiddleware)
 });
 
 epicMiddleware.run(toggleFiltersEpic);

@@ -9,7 +9,7 @@ import {
     InputLabel,
     MenuItem,
     Select,
-    TextField,
+    TextField, Typography,
 } from "@mui/material";
 import {useForm} from 'react-hook-form';
 import React, {useState} from "react";
@@ -20,8 +20,8 @@ import {DesktopDateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import dayjs, {Dayjs} from 'dayjs';
 import utc from "dayjs/plugin/utc";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import ITask from "../../types/ITask";
-import useActionHook from "../../features/redux/customHooks/useActionHook";
+import Task from "../../types/Task";
+import useActionHook from "../../features/redux/taskHooks/useActionHook";
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -94,7 +94,7 @@ const OpenFormDialogBox = () => {
     };
 
     const handleSubmit = () => {
-        const newTask: ITask = {
+        const newTask: Task = {
             id: (Number(tasksCount) + 1).toString(),
             title: title,
             description: description,
@@ -116,7 +116,7 @@ const OpenFormDialogBox = () => {
 
 
     return (
-        <div>
+        <>
             <Dialog open={openDialog} onClose={handleCloseDialog}>
                 <DialogTitle sx={{
                     margin: 2,
@@ -141,10 +141,10 @@ const OpenFormDialogBox = () => {
                             label="Title"
                             variant="outlined"
                             fullWidth
-                            style={{marginTop: '5px'}}
+                            style={{marginTop: '8px'}}
                             onChange={handleTitle}/>
                         {errors.title && (
-                            <p style={{color: 'red'}}>{errors.title.message as string}</p>
+                            <Typography style={{color: 'red'}}>{errors.title.message as string}</Typography>
                         )}
 
                         <TextField
@@ -157,14 +157,14 @@ const OpenFormDialogBox = () => {
                             label="Description"
                             variant="outlined"
                             fullWidth
-                            style={{marginTop: '5px'}}
+                            style={{marginTop: '7px'}}
                             onChange={handleDescription}/>
                         {errors.description && (
-                            <p style={{color: 'red'}}>{errors.description.message as string}</p>
+                            <Typography style={{color: 'red'}}>{errors.description.message as string}</Typography>
                         )}
 
 
-                        <FormControl fullWidth style={{marginTop: '5px'}}>
+                        <FormControl fullWidth style={{marginTop: '7px'}}>
                             <InputLabel>Status</InputLabel>
                             <Select
                                 {...register('status', {required: true})}
@@ -178,11 +178,11 @@ const OpenFormDialogBox = () => {
                                 <MenuItem value={"In Progress"}>In Progress</MenuItem>
                                 <MenuItem value={"Close"}>Close</MenuItem>
                             </Select>
-                            {errors.status && <div style={{color: 'red'}}>Status is required</div>}
+                            {errors.status && <Typography style={{color: 'red'}}>Status is required</Typography>}
                         </FormControl>
 
 
-                        <FormControl fullWidth style={{marginTop: '5px'}}>
+                        <FormControl fullWidth style={{marginTop: '7px'}}>
                             <InputLabel>Priority</InputLabel>
                             <Select
                                 {...register('priority', {required: true})}
@@ -196,7 +196,7 @@ const OpenFormDialogBox = () => {
                                 <MenuItem value={"Medium"}>Medium</MenuItem>
                                 <MenuItem value={"High"}>High</MenuItem>
                             </Select>
-                            {errors.priority && <div style={{color: 'red'}}>Priority is required</div>}
+                            {errors.priority && <Typography style={{color: 'red'}}>Priority is required</Typography>}
                         </FormControl>
 
 
@@ -210,10 +210,10 @@ const OpenFormDialogBox = () => {
                             label="Estimated Time"
                             variant="outlined"
                             fullWidth
-                            style={{marginTop: '5px', marginBottom: '7px'}}
+                            style={{marginTop: '7px', marginBottom: '7px'}}
                             onChange={handleEstTime}/>
                         {errors.estimatedTime && (
-                            <p style={{color: 'red'}}>{errors.estimatedTime.message as string}</p>
+                            <Typography style={{color: 'red'}}>{errors.estimatedTime.message as string}</Typography>
                         )}
 
 
@@ -237,10 +237,10 @@ const OpenFormDialogBox = () => {
                                 label="Review"
                                 variant="outlined"
                                 fullWidth
-                                style={{marginTop: '5px'}}
+                                style={{marginTop: '7px'}}
                                 onChange={handleReview}/>}
                         {errors.review && (
-                            <p style={{color: 'red'}}>{errors.review.message as string}</p>
+                            <Typography style={{color: 'red'}}>{errors.review.message as string}</Typography>
                         )}
 
                         {isClosed &&
@@ -254,10 +254,10 @@ const OpenFormDialogBox = () => {
                                 label="Time Spent"
                                 variant="outlined"
                                 fullWidth
-                                style={{marginTop: '5px'}}
+                                style={{marginTop: '7px'}}
                                 onChange={handleTimeSpent}/>}
                         {errors.timeSpent && (
-                            <p style={{color: 'red'}}>{errors.timeSpent.message as string}</p>
+                            <Typography style={{color: 'red'}}>{errors.timeSpent.message as string}</Typography>
                         )}
                     </FormGroup>
                 </DialogContent>
@@ -267,7 +267,7 @@ const OpenFormDialogBox = () => {
                     alignItems: 'center',
                     textAlign: 'center',
                     justifyContent: 'center',
-                    marginBottom: '5px'
+                    marginBottom: '7px'
                 }}>
                     <Button onClick={handleSubmit} style={{
                         background: "#228B22",
@@ -286,7 +286,7 @@ const OpenFormDialogBox = () => {
                 </DialogActions>
             </Dialog>
             <ToastContainer/>
-        </div>
+        </>
     )
 };
 

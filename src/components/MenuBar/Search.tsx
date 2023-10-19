@@ -1,4 +1,4 @@
-import {IconButton, InputBase, Paper} from "@mui/material";
+import {FormControl, IconButton, InputBase, Paper} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React, {useEffect, useState} from "react";
 import {setSearchQuery} from "../../features/redux/filter/filterSlice";
@@ -7,11 +7,11 @@ import {toggleFilterAction} from "../../features/redux/actions";
 
 
 const Search = () => {
-    const [query, setQuery] = useState(""); //TODO: change name to input
+    const [input, setInput] = useState<string>("");
     const dispatch = useDispatch();
 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setQuery(e.target.value);
+        setInput(e.target.value);
     };
 
     const handleSubmit = (e: any) => {
@@ -20,13 +20,13 @@ const Search = () => {
 
 
     useEffect(() => {
-        dispatch(setSearchQuery(query));
+        dispatch(setSearchQuery(input));
         dispatch(toggleFilterAction());
-    }, [query]);
+    }, [input]);
 
 
     return (
-        <form>
+        <FormControl>
             <Paper
                 elevation={0}
                 sx={{
@@ -42,14 +42,14 @@ const Search = () => {
                     sx={{ml: 1, flex: 1}}
                     placeholder="Search For A Task By Title.."
                     inputProps={{"aria-label": "search for a task by title"}}
-                    value={query}
+                    value={input}
                     onChange={handleInput}
                 />
                 <IconButton type="submit" aria-label="search" onClick={handleSubmit}>
                     <SearchIcon style={{fill: "blue"}}/>
                 </IconButton>
             </Paper>
-        </form>
+        </FormControl>
     );
 
 };

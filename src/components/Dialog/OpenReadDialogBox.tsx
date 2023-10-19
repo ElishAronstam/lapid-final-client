@@ -1,4 +1,13 @@
-import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, styled} from "@mui/material";
+import {
+    Button,
+    Container,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle, makeStyles,
+    styled, Typography
+} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {closeReadDialogBox, updateCurrentTaskId} from "../../features/redux/task/taskSlice";
 import {openReadDialogBoxSelector, selectCurrentTask} from "../../features/redux/task/taskSelectors";
@@ -14,11 +23,19 @@ const OpenReadDialogBox = () => {
     const dispatch = useDispatch();
 
     const handleCloseDialog = () => {
-        dispatch(closeReadDialogBox());
+        dispatch(closeReadDialogBox);
         dispatch(updateCurrentTaskId(""));
     };
 
-    return (<div>
+    const StyledTypography = styled(Typography)(({theme}) => ({
+        display: "inline-block", // Make the Typography element inline
+        variant:'body1',
+        fontWeight: "bold"
+    }));
+
+
+    return (
+        <Container>
         {task && <Dialog open={openDialog} onClose={handleCloseDialog}>
             <DialogTitle sx={{
                 margin: 2, display: 'flex', alignItems: 'center', textAlign: 'center', justifyContent: 'center'
@@ -28,27 +45,35 @@ const OpenReadDialogBox = () => {
 
             <DialogContent>
                 <StyledDialogContentText>
-                    <strong>Description:</strong> {task.description}
+                    <StyledTypography>Description:</StyledTypography> {task.description}
                 </StyledDialogContentText>
 
                 <StyledDialogContentText>
-                    <strong>Priority:</strong> {task.priority}
+                    <StyledTypography>Priority:</StyledTypography> {task.priority}
                 </StyledDialogContentText>
 
                 <StyledDialogContentText>
-                    <strong>Estimated Time:</strong> {task.estimatedTime}
+                    <StyledTypography>Estimated Time:</StyledTypography> {task.estimatedTime}
                 </StyledDialogContentText>
 
                 {task.endTime && <StyledDialogContentText>
-                    <strong>End Time: </strong>{task.endTime}
+                    <StyledTypography>End Time: </StyledTypography>
+                    {new Date(task.endTime).toLocaleString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                        }
+                    )}
                 </StyledDialogContentText>}
 
                 {task.review && <StyledDialogContentText>
-                    <strong>Review:</strong> {task.review}
+                    <StyledTypography>Review:</StyledTypography> {task.review}
                 </StyledDialogContentText>}
 
                 {task.timeSpent && <StyledDialogContentText>
-                    <strong>Time Spent:</strong> {task.timeSpent}
+                    <StyledTypography>Time Spent:</StyledTypography> {task.timeSpent}
                 </StyledDialogContentText>
                 }
 
@@ -68,7 +93,7 @@ const OpenReadDialogBox = () => {
                         }}>Close</Button>
             </DialogActions>
         </Dialog>}
-    </div>)
+    </Container>)
 
 };
 

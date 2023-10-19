@@ -1,10 +1,11 @@
 import {TableCell, TableHead, TableRow} from "@mui/material";
 
-interface IHeadProps {
-    titles: string[];
+interface HeadProps {
+    titles: Array<string>;
 };
 
-const TasksTableHead = ({titles}: IHeadProps) => {
+
+const TasksTableHead = ({titles}: HeadProps) => {
     return (<TableHead>
         <TableRow>
             {titles.map((category: string) => {

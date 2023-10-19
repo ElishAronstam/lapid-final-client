@@ -1,14 +1,14 @@
-import ITask from "../../../types/ITask";
+import Task from "../../../types/Task";
 import data from "../../../assets/mock.json";
 
 export const getInitTasks = () => {
     const tasks = getTasksFromFile();
-    let tasksObjects: ITask[] = [];
+    let tasksObjects: Array<Task> = [];
 
     tasks.forEach(task => {
         if (task.status === "Close") {
 
-            const newTask: ITask = {
+            const newTask: Task = {
                 id: task.id,
                 title: task.title,
                 description: task.description,
@@ -22,7 +22,7 @@ export const getInitTasks = () => {
 
             tasksObjects.push(newTask);
         } else if (task.priority === "High") {
-            const newTask: ITask = {
+            const newTask: Task = {
                 id: task.id,
                 title: task.title,
                 description: task.description,
@@ -34,7 +34,7 @@ export const getInitTasks = () => {
 
             tasksObjects.push(newTask);
         } else {
-            const newTask: ITask = {
+            const newTask: Task = {
                 id: task.id,
                 title: task.title,
                 description: task.description,
@@ -61,7 +61,7 @@ export const filterTasks = (filterByOpenStatus: boolean, filterByHighPriority: b
     // Once i have the server will filter the tasks that are in the server side meaning will include the new ones, here we don't add to mock
 
     if (query != "") {
-        filteredTasks = filteredTasks.filter((task: ITask) => {
+        filteredTasks = filteredTasks.filter((task: Task) => {
             return task.title.toString().toLowerCase().includes((query.toLowerCase()));
         });
     }
