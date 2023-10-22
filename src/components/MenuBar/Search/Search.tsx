@@ -1,10 +1,21 @@
-import {FormControl, IconButton, InputBase, Paper} from "@mui/material";
+import {FormControl, IconButton, InputBase, Paper, SxProps} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React, {useEffect, useState} from "react";
-import {setSearchQuery, toggleFilter} from "../../features/redux/filter/filterSlice";
+import {setSearchQuery, toggleFilter} from "../../../features/redux/filter/filterSlice";
 import {useDispatch} from "react-redux";
-import {toggleFilterAction} from "../../features/redux/actions";
+import {toggleFilterAction} from "../../../features/redux/actions";
+import {deepPurple, grey} from "@mui/material/colors";
 
+const PaperStyle:SxProps={
+    border: 1,
+    borderColor:deepPurple[300],
+    "&:hover": {borderColor:grey[500]},
+    paddingX:4,
+    paddingY:1,
+    display: "flex",
+    alignItems: "center",
+    borderRadius: 100,
+}
 
 const Search = () => {
     const [input, setInput] = useState<string>("");
@@ -21,8 +32,6 @@ const Search = () => {
 
     useEffect(() => {
         dispatch(toggleFilter({type:'toggleFilter',payload:input})); // Goes to task slice
-        // dispatch(setSearchQuery(input));
-        // dispatch(toggleFilterAction());
     }, [input]);
 
 
@@ -31,12 +40,7 @@ const Search = () => {
             <Paper
                 elevation={0}
                 sx={{
-                    border: "1px solid #DCDCDC",
-                    "&:hover": {border: "1px solid gray"},
-                    p: "2px 4px",
-                    display: "flex",
-                    alignItems: "center",
-                    borderRadius: 100,
+                   ...PaperStyle
                 }}
             >
                 <InputBase

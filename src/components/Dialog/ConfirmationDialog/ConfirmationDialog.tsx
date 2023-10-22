@@ -1,27 +1,25 @@
 import {Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, Typography} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
-import {
-    openConfirmationDialogBoxSelector,
-    selectCurrentTask
-} from "../../features/redux/task/taskSelectors";
-import {closeConfirmationDialogBox, updateCurrentTaskId} from "../../features/redux/task/taskSlice";
-import useActionHook from "../../features/redux/taskHooks/useActionHook";
+import {openConfirmationDialogBoxSelector, selectTaskToDelete} from "../../../features/redux/task/taskSelectors";
+import {closeConfirmationDialogBox, updateTaskIdToDelete} from "../../../features/redux/task/taskSlice";
+import useActionHook from "../../../features/redux/taskHooks/useActionHook";
 
 const ConfirmationDialog = () => {
-const openDialog = useSelector(openConfirmationDialogBoxSelector);
-const task = useSelector(selectCurrentTask);
+    const openDialog = useSelector(openConfirmationDialogBoxSelector);
 
-const {deleteTaskFromStore} = useActionHook();
+    const task = useSelector(selectTaskToDelete);
 
-const dispatch = useDispatch();
+    const {deleteTaskFromStore} = useActionHook();
 
-const handleCloseDialog = () => {
-    dispatch(closeConfirmationDialogBox);
-    dispatch(updateCurrentTaskId(""));
-};
+    const dispatch = useDispatch();
+
+    const handleCloseDialog = () => {
+        dispatch(closeConfirmationDialogBox);
+        dispatch(updateTaskIdToDelete(""));
+    };
 
     const handleConfirmed = () => {
-        if(task) {
+        if (task) {
             deleteTaskFromStore(task.id);
             dispatch(closeConfirmationDialogBox);
         }

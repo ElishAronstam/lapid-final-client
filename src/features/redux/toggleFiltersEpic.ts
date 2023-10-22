@@ -1,5 +1,5 @@
 import {Epic, ofType} from 'redux-observable';
-import {map, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {setTasks} from "./task/taskSlice";
 import {filterTasks} from "./task/helper";
 
@@ -11,7 +11,6 @@ const toggleFiltersEpic: Epic = (action$, state$) =>
             return setTasks(filteredTasks);
         })
     );
-
 
 
 export default toggleFiltersEpic;

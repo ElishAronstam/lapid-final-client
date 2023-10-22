@@ -1,5 +1,6 @@
 import {
-    Button, Container,
+    Button,
+    Container,
     Dialog,
     DialogActions,
     DialogContent,
@@ -9,25 +10,46 @@ import {
     InputLabel,
     MenuItem,
     Select,
-    TextField, Typography,
+    styled,
+    SxProps,
+    TextField,
 } from "@mui/material";
-import {useForm} from 'react-hook-form';
+
 import React, {useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import {openFormDialogBoxSelector, selectItemCount,} from '../../features/redux/task/taskSelectors'
-import {closeFormDialogBox} from "../../features/redux/task/taskSlice"
+import {openFormDialogBoxSelector, selectItemCount,} from '../../../features/redux/task/taskSelectors'
+import {closeFormDialogBox} from "../../../features/redux/task/taskSlice"
 import {DesktopDateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import dayjs, {Dayjs} from 'dayjs';
 import utc from "dayjs/plugin/utc";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import Task from "../../types/Task";
-import useActionHook from "../../features/redux/taskHooks/useActionHook";
+import Task from "../../../types/Task";
+import useActionHook from "../../../features/redux/taskHooks/useActionHook";
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const StyledTextField = styled(TextField)(({theme}) => ({
+    variant: "outlined",
+    marginBottom: theme.spacing(2)
+}));
+
+export const DialogTitleStyle: SxProps = {
+    margin: 2,
+    display: 'flex',
+    alignItems: 'center',
+    textAlign: 'center',
+    justifyContent: 'center'
+}
+
+export const DialogActionsStyle:SxProps = {
+    display: 'flex',
+    alignItems: 'center',
+    textAlign: 'center',
+    justifyContent: 'center',
+    marginBottom: 5
+}
 
 const OpenFormDialogBox = () => {
-    const {register, formState: {errors}} = useForm();
     const {addTaskToStore} = useActionHook();
     dayjs.extend(utc);
 
@@ -109,66 +131,40 @@ const OpenFormDialogBox = () => {
 
         addTaskToStore(newTask);
 
-        toast.success('Task added successfully !', {
+        toast.success('TaskItem added successfully !', {
             position: toast.POSITION.TOP_RIGHT
         });
 
     };
 
 
+
     return (
         <Container>
             <Dialog open={openDialog} onClose={handleCloseDialog}>
-                <DialogTitle sx={{
-                    margin: 2,
-                    display: 'flex',
-                    alignItems: 'center',
-                    textAlign: 'center',
-                    justifyContent: 'center'
-                }}>
+                <DialogTitle
+                    sx={{
+                        ...DialogTitleStyle
+                    }}>
                     New Task
                 </DialogTitle>
 
                 <DialogContent>
                     <FormGroup sx={{m: 2, minWidth: 400}}>
 
-                        <TextField
-                            {...register('title', {
-                                required: {value: true, message: 'Title is required'},
-                                minLength: {value: 3, message: 'Task must be at least 3 characters'},
-                                maxLength: 99,
-                            })}
+                        <StyledTextField
                             name="title"
                             label="Title"
-                            variant="outlined"
-                            fullWidth
-                            style={{marginTop: '8px'}}
                             onChange={handleTitle}/>
-                        {errors.title && (
-                            <Typography style={{color: 'red'}}>{errors.title.message as string}</Typography>
-                        )}
 
-                        <TextField
-                            {...register('description', {
-                                required: {value: true, message: 'Description is required'},
-                                minLength: {value: 5, message: 'Description must be at least 5 characters'},
-                                maxLength: 99,
-                            })}
+                        <StyledTextField
                             name="description"
                             label="Description"
-                            variant="outlined"
-                            fullWidth
-                            style={{marginTop: '7px'}}
                             onChange={handleDescription}/>
-                        {errors.description && (
-                            <Typography style={{color: 'red'}}>{errors.description.message as string}</Typography>
-                        )}
 
-
-                        <FormControl fullWidth style={{marginTop: '7px'}}>
+                        <FormControl fullWidth style={{marginTop: 5}}>
                             <InputLabel>Status</InputLabel>
                             <Select
-                                {...register('status', {required: true})}
                                 value={status}
                                 label="Status"
                                 onChange={handleStatusChange}
@@ -179,14 +175,12 @@ const OpenFormDialogBox = () => {
                                 <MenuItem value={"In Progress"}>In Progress</MenuItem>
                                 <MenuItem value={"Close"}>Close</MenuItem>
                             </Select>
-                            {errors.status && <Typography style={{color: 'red'}}>Status is required</Typography>}
                         </FormControl>
 
 
-                        <FormControl fullWidth style={{marginTop: '7px'}}>
+                        <FormControl fullWidth sx={{my: 2}}>
                             <InputLabel>Priority</InputLabel>
                             <Select
-                                {...register('priority', {required: true})}
                                 value={priority}
                                 label="Priority"
                                 onChange={handlePriorityChange}
@@ -197,25 +191,13 @@ const OpenFormDialogBox = () => {
                                 <MenuItem value={"Medium"}>Medium</MenuItem>
                                 <MenuItem value={"High"}>High</MenuItem>
                             </Select>
-                            {errors.priority && <Typography style={{color: 'red'}}>Priority is required</Typography>}
                         </FormControl>
 
 
-                        <TextField
-                            {...register('estimatedTime', {
-                                required: {value: true, message: 'Estimated Time is required'},
-                                minLength: {value: 3, message: "Estimated Time must be at least 3 characters"},
-                                maxLength: 99,
-                            })}
+                        <StyledTextField
                             name="estimatedTime"
                             label="Estimated Time"
-                            variant="outlined"
-                            fullWidth
-                            style={{marginTop: '7px', marginBottom: '7px'}}
                             onChange={handleEstTime}/>
-                        {errors.estimatedTime && (
-                            <Typography style={{color: 'red'}}>{errors.estimatedTime.message as string}</Typography>
-                        )}
 
 
                         {(isUrgent || isClosed) &&
@@ -224,66 +206,34 @@ const OpenFormDialogBox = () => {
                                     label="Select End Time"
                                     value={dayjs.utc(endTime)}
                                     minDate={dayjs.utc(new Date())}
-                                    onChange={(newDateTime) => setEndTime(newDateTime)}/>
+                                    onChange={(newDateTime) => setEndTime(newDateTime)}
+                                    sx={{marginBottom: 2}}/>
                             </LocalizationProvider>}
 
                         {isClosed &&
-                            <TextField
-                                {...register('review', {
-                                    required: {value: true, message: 'Review is required'},
-                                    minLength: {value: 3, message: "Review must be at least 5 characters"},
-                                    maxLength: 99,
-                                })}
+                            <StyledTextField
                                 name="review"
                                 label="Review"
-                                variant="outlined"
-                                fullWidth
-                                style={{marginTop: '7px'}}
                                 onChange={handleReview}/>}
-                        {errors.review && (
-                            <Typography style={{color: 'red'}}>{errors.review.message as string}</Typography>
-                        )}
 
                         {isClosed &&
-                            <TextField
-                                {...register('timeSpent', {
-                                    required: {value: true, message: 'Time spent is required'},
-                                    minLength: {value: 3, message: "Time spent must be at least 5 characters"},
-                                    maxLength: 99,
-                                })}
+                            <StyledTextField
                                 name="timeSpent"
                                 label="Time Spent"
-                                variant="outlined"
-                                fullWidth
-                                style={{marginTop: '7px'}}
                                 onChange={handleTimeSpent}/>}
-                        {errors.timeSpent && (
-                            <Typography style={{color: 'red'}}>{errors.timeSpent.message as string}</Typography>
-                        )}
                     </FormGroup>
                 </DialogContent>
 
                 <DialogActions sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    textAlign: 'center',
-                    justifyContent: 'center',
-                    marginBottom: '7px'
+                   ...DialogActionsStyle
                 }}>
-                    <Button onClick={handleSubmit} style={{
-                        background: "#228B22",
-                        color: "white",
-                        width: "100px",
-                        height: "50px"
-                    }}>Add</Button>
+                    <Button onClick={handleSubmit}
+                            sx={{background: "#228B22", color: "white"}}>Add
+                    </Button>
 
                     <Button onClick={handleCloseDialog}
-                            style={{
-                                background: "#FF0000",
-                                color: "white",
-                                width: "100px",
-                                height: "50px"
-                            }}>Cancel</Button>
+                            sx={{background: "#FF0000", color: "white",}}>Cancel
+                    </Button>
                 </DialogActions>
             </Dialog>
             <ToastContainer/>

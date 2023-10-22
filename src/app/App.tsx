@@ -2,14 +2,14 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import {myStore} from "./store";
 import Header from "../components/Header/Header";
-import Search from "../components/MenuBar/Search";
-import QuickFilters from "../components/MenuBar/QuickFilters";
-import TasksTableContainer from "../components/Table/TasksTableContainer";
-import AddButton from "../components/MenuBar/AddButton";
-import OpenFormDialogBox from "../components/Dialog/OpenFormDialogBox";
-import OpenReadDialogBox from "../components/Dialog/OpenReadDialogBox";
+import Search from "../components/MenuBar/Search/Search";
+import QuickFilters from "../components/MenuBar/QuickFilter/QuickFilters";
+import TasksTableContainer from "../components/Table/TasksTableContainer/TasksTableContainer";
+import AddButton from "../components/MenuBar/AddButton/AddButton";
+import OpenFormDialogBox from "../components/Dialog/OpenFormDialogBox/OpenFormDialogBox";
+import OpenReadDialogBox from "../components/Dialog/OpenReadDialogBox/OpenReadDialogBox";
 import {Container} from "@mui/material";
-import ConfirmationDialog from "../components/Dialog/ConfirmationDialog";
+import ConfirmationDialog from "../components/Dialog/ConfirmationDialog/ConfirmationDialog";
 
 const containerStyles = {
     display: 'flex',

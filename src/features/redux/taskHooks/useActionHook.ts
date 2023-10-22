@@ -5,7 +5,7 @@ import {
     deleteSingleTask,
     openConfirmationDialogBox,
     openReadDialogBox,
-    updateCurrentTaskId
+    updateCurrentTaskId, updateTaskIdToDelete
 } from '../task/taskSlice';
 
 const useActionHook = () => {
@@ -25,7 +25,7 @@ const useActionHook = () => {
     };
 
     const showConfirmation= (taskId:string) => {
-        dispatch(updateCurrentTaskId(taskId));
+        dispatch(updateTaskIdToDelete(taskId));
         dispatch(openConfirmationDialogBox());
     }
 

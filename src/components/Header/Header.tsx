@@ -1,15 +1,18 @@
 import React from 'react';
-import {Container, Typography} from '@mui/material';
+import {Container, SxProps, Typography} from '@mui/material';
 
+const ContainerStyle: SxProps = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 5,
+}
 export default function Header() {
     return (
         <Container
             maxWidth="lg"
-            style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                margin: '20px',
+            sx={{
+                ...ContainerStyle
             }}
         >
             <Typography variant="h3" component="h3">

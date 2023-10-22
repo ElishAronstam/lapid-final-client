@@ -7,6 +7,7 @@ export const taskSlice = createSlice({
     initialState: {
         tasks: getInitTasks(),
         currentTaskId: "",
+        taskIdToDelete:"",
         openFormDialogBox: false,
         openReadDialogBox: false,
         openConfirmationDialogBox:false
@@ -28,6 +29,9 @@ export const taskSlice = createSlice({
 
         updateCurrentTaskId: (state, action: PayloadAction<string>) => {
             state.currentTaskId = action.payload;
+        },
+        updateTaskIdToDelete: (state, action: PayloadAction<string>) => {
+            state.taskIdToDelete = action.payload;
         },
         openFormDialogBox: (state) => {
             state.openFormDialogBox = true;
@@ -65,7 +69,8 @@ export const {
     closeReadDialogBox,
     openReadDialogBox,
     openConfirmationDialogBox,
-    closeConfirmationDialogBox
+    closeConfirmationDialogBox,
+    updateTaskIdToDelete,
 } = taskSlice.actions;
 
 export default taskSlice.reducer;

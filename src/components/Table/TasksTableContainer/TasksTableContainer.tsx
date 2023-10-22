@@ -1,16 +1,12 @@
 
-import TasksTableHead from "./TasksTableHead";
-import {Paper, Table, TableBody, TableContainer, Typography, TypographyVariant} from "@mui/material";
-import useGetTasksHook from "../../features/redux/taskHooks/useGetTasksHook";
+import TasksTableHead from "../TasksTableHead/TasksTableHead";
+import {Paper, SxProps, Table, TableBody, TableContainer, Typography, TypographyVariant} from "@mui/material";
+import useGetTasksHook from "../../../features/redux/taskHooks/useGetTasksHook";
 import {useSelector} from "react-redux";
-import {selectItemCount} from "../../features/redux/task/taskSelectors";
-import Task from "../../types/Task";
-import TaskItem from "../Task/TaskItem";
+import {selectItemCount} from "../../../features/redux/task/taskSelectors";
+import Task from "../../../types/Task";
+import TaskItem from "../../TaskItem/TaskItem";
 
-const containerStyle={
-    margin:4,
-    maxWidth:100,
-}
 
 const TasksTableContainer = () => {
     const tasksCount = useSelector(selectItemCount);
@@ -18,8 +14,8 @@ const TasksTableContainer = () => {
     const tasks = useGetTasksHook();
 
     return (<>
-        <Typography variant={'h5'}>There are currently: {tasksCount} Tasks</Typography>
-        <TableContainer component={Paper} sx={{containerStyle}}>
+        <Typography variant={'h5'}> There are currently: {tasksCount} Tasks</Typography>
+        <TableContainer component={Paper} sx={{margin:4}}>
             <Table>
                 <TasksTableHead titles={titles}/>
                 <TableBody>
