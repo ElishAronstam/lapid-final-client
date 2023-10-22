@@ -1,18 +1,11 @@
 import {Button, Container, Dialog, DialogActions, DialogContent, DialogTitle, Typography} from "@mui/material";
-import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {
     openConfirmationDialogBoxSelector,
-    openReadDialogBoxSelector,
     selectCurrentTask
 } from "../../features/redux/task/taskSelectors";
-import {closeConfirmationDialogBox, closeReadDialogBox, updateCurrentTaskId} from "../../features/redux/task/taskSlice";
+import {closeConfirmationDialogBox, updateCurrentTaskId} from "../../features/redux/task/taskSlice";
 import useActionHook from "../../features/redux/taskHooks/useActionHook";
-
-// interface ConfirmationDialogProps {
-//     TaskName: string,
-//     onConfirm: (confirmation: boolean) => void;
-// }
 
 const ConfirmationDialog = () => {
 const openDialog = useSelector(openConfirmationDialogBoxSelector);
@@ -37,7 +30,7 @@ const handleCloseDialog = () => {
     return (<Container>
         {task && <Dialog open={openDialog} onClose={handleCloseDialog}>
             <DialogTitle>
-                <Typography variant="h4">Delete Item</Typography>
+                <Typography variant="h6">Delete Item</Typography>
             </DialogTitle>
             <DialogContent>
                 <Typography variant="h6">

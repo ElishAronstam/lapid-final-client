@@ -1,7 +1,7 @@
 import {FormControl, IconButton, InputBase, Paper} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import React, {useEffect, useState} from "react";
-import {setSearchQuery} from "../../features/redux/filter/filterSlice";
+import {setSearchQuery, toggleFilter} from "../../features/redux/filter/filterSlice";
 import {useDispatch} from "react-redux";
 import {toggleFilterAction} from "../../features/redux/actions";
 
@@ -20,8 +20,9 @@ const Search = () => {
 
 
     useEffect(() => {
-        dispatch(setSearchQuery(input));
-        dispatch(toggleFilterAction());
+        dispatch(toggleFilter({type:'toggleFilter',payload:input})); // Goes to task slice
+        // dispatch(setSearchQuery(input));
+        // dispatch(toggleFilterAction());
     }, [input]);
 
 

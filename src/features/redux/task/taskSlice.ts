@@ -1,7 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {getInitTasks} from "./helper";
 import Task from "../../../types/Task";
-import {TOGGLE_FILTER} from "../actions";
 
 export const taskSlice = createSlice({
     name: 'tasks',

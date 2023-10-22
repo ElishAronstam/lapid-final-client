@@ -12,7 +12,6 @@ interface TaskProps {
 const TaskItem = ({task}: TaskProps) => {
     const {viewTaskDetails, showConfirmation} = useActionHook();
 
-
     return (
         <TableRow>
             <TableCell>

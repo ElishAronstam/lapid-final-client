@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {TOGGLE_FILTER} from "../actions";
+import { ToggleFilter} from "../actions";
 
 export const filterSlice = createSlice({
     name: 'filters',
@@ -11,12 +11,15 @@ export const filterSlice = createSlice({
 
     reducers: {
 
-        toggleFilterByPriority: (state) => {
-            state.filterTaskByHighPriority = !state.filterTaskByHighPriority;
-        },
-
-        toggleFilterByStatus: (state) => {
-            state.filterTaskByOpenStatus = !state.filterTaskByOpenStatus;
+        toggleFilter:(state,action:PayloadAction<ToggleFilter>) => {
+             const filterParam=action.payload.payload;
+             if(filterParam.toString() === 'open') {
+                 state.filterTaskByOpenStatus = !state.filterTaskByOpenStatus;
+             } else if(filterParam.toString() === 'high'){
+                 state.filterTaskByHighPriority = !state.filterTaskByHighPriority;
+             } else {
+                 state.searchQuery = action.payload.payload;
+             }
         },
 
         setSearchQuery: (state, action: PayloadAction<string>) => {
@@ -27,9 +30,8 @@ export const filterSlice = createSlice({
 
 
 export const {
-    toggleFilterByPriority,
-    toggleFilterByStatus,
-    setSearchQuery
+    setSearchQuery,
+    toggleFilter,
 } = filterSlice.actions;
 
 export default filterSlice.reducer;

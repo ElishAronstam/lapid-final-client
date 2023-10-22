@@ -1,5 +1,5 @@
 import {
-    Button,
+    Button, Container,
     Dialog,
     DialogActions,
     DialogContent,
@@ -24,6 +24,7 @@ import Task from "../../types/Task";
 import useActionHook from "../../features/redux/taskHooks/useActionHook";
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 
 const OpenFormDialogBox = () => {
     const {register, formState: {errors}} = useForm();
@@ -116,7 +117,7 @@ const OpenFormDialogBox = () => {
 
 
     return (
-        <>
+        <Container>
             <Dialog open={openDialog} onClose={handleCloseDialog}>
                 <DialogTitle sx={{
                     margin: 2,
@@ -286,7 +287,7 @@ const OpenFormDialogBox = () => {
                 </DialogActions>
             </Dialog>
             <ToastContainer/>
-        </>
+        </Container>
     )
 };
 
