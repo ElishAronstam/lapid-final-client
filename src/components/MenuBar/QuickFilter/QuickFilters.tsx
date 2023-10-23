@@ -1,21 +1,17 @@
-import {Button, Container, styled, Typography} from "@mui/material";
+import {Container, styled, ToggleButton, Typography} from "@mui/material";
 import {deepPurple} from "@mui/material/colors"
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {toggleFilter} from "../../../features/redux/filter/filterSlice";
 import {toggleFilterAction} from "../../../features/redux/actions";
-import {
-    toggleFilterByPrioritySelector,
-    toggleFilterByStatusSelector
-} from "../../../features/redux/filter/filterSelectors";
+import {useState} from "react";
 
 
-const StyledButton = styled(Button)<{ isFilter: boolean }>(({ theme, isFilter }) => ({
-    marginTop: theme.spacing(3),
-    marginRight: theme.spacing(1),
-    backgroundColor: isFilter ? deepPurple[50] : deepPurple[300],
-    color: isFilter ? deepPurple[400] : deepPurple[50],
-    border: isFilter ? `${theme.spacing(0.25)} solid ${deepPurple[400]}` : 'none', // Use theme.spacing to set border width
-    "&:hover": {
+const StyledToggleButton = styled(ToggleButton)(({theme}) => ({
+    marginTop: theme.spacing(2),
+    marginLeft:theme.spacing(2),
+    backgroundColor: deepPurple[300],
+    color: deepPurple[50],
+    "&.Mui-selected, &:hover": {
         backgroundColor: deepPurple[50],
         color: deepPurple[400],
         border: `${theme.spacing(0.25)} solid ${deepPurple[400]}`,
@@ -29,7 +25,7 @@ const StyledTypography = styled(Typography)(({theme}) => ({
     marginTop: theme.spacing(3),
 }));
 
-const StyledContainer=styled(Container)(({theme}) => ({
+const StyledContainer = styled(Container)(({theme}) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -39,9 +35,6 @@ const StyledContainer=styled(Container)(({theme}) => ({
 
 const QuickFilters = () => {
 
-    const isFilterByPriority = useSelector(toggleFilterByPrioritySelector);
-    const isFilterByState = useSelector(toggleFilterByStatusSelector);
-
     const dispatch = useDispatch();
 
 
@@ -49,14 +42,29 @@ const QuickFilters = () => {
         dispatch(toggleFilter(toggleFilterAction(param))); // Goes to task slice
     }
 
+    const [statusSelected, setStatusSelected] = useState(false);
+    const [prioritySelected, setPrioritySelected] = useState(false);
+
     return (
         <StyledContainer>
             <StyledTypography>
                 QUICK FILTERS:
             </StyledTypography>
-            <StyledButton onClick={() => handleFilters('open')} isFilter={isFilterByState}> Open Tasks </StyledButton>
-            <StyledButton onClick={() => handleFilters('high')} isFilter={isFilterByPriority}> High Priority
-                Tasks </StyledButton>
+
+            <StyledToggleButton onClick={() => handleFilters('open')}
+                                selected={statusSelected}
+                                value="open"
+                                onChange={() => {
+                                    setStatusSelected(!statusSelected);
+                                }}>
+                Open Tasks </StyledToggleButton>
+            <StyledToggleButton onClick={() => handleFilters('high')}
+                                selected={prioritySelected}
+                                value="high"
+                                onChange={() => {
+                                    setPrioritySelected(!prioritySelected);
+                                }}>
+                High Priority Tasks </StyledToggleButton>
         </StyledContainer>
     )
 };

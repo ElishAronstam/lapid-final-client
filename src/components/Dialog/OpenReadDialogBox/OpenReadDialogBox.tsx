@@ -39,9 +39,9 @@ const OpenReadDialogBox = () => {
     return (
         <Container>
             {task && <Dialog open={openDialog} onClose={handleCloseDialog}>
-                <DialogTitle sx={{
-                    ...DialogTitleStyle
-                }}>
+                <DialogTitle sx={
+                    DialogTitleStyle
+                }>
                     {task.title}
                 </DialogTitle>
 
@@ -82,9 +82,9 @@ const OpenReadDialogBox = () => {
 
                 </DialogContent>
 
-                <DialogActions sx={{
-                    ...DialogActionsStyle
-                }}>
+                <DialogActions sx={
+                    DialogActionsStyle
+                }>
                     <Button onClick={handleCloseDialog}
                             sx={{
                                 background: "#FF0000", color: "white"

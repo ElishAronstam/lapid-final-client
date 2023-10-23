@@ -39,9 +39,9 @@ const Search = () => {
         <FormControl>
             <Paper
                 elevation={0}
-                sx={{
-                   ...PaperStyle
-                }}
+                sx={
+                   PaperStyle
+                }
             >
                 <InputBase
                     sx={{ml: 1, flex: 1}}

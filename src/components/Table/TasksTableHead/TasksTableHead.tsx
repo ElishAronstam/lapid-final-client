@@ -8,11 +8,11 @@ interface HeadProps {
 const TasksTableHead = ({titles}: HeadProps) => {
     return (<TableHead>
         <TableRow>
-            {titles.map((category: string) => {
-                return <TableCell
+            {titles.map((category: string) =>
+                <TableCell
                     key={category} align="center"> {category}
                 </TableCell>
-            })}
+            )}
         </TableRow>
     </TableHead>);
 };

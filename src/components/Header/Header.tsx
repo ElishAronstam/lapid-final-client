@@ -11,9 +11,9 @@ export default function Header() {
     return (
         <Container
             maxWidth="lg"
-            sx={{
-                ...ContainerStyle
-            }}
+            sx={
+                ContainerStyle
+            }
         >
             <Typography variant="h3" component="h3">
                 Welcome To Task Manager
