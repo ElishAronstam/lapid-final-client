@@ -15,7 +15,7 @@ export default function Header() {
                 ContainerStyle
             }
         >
-            <Typography variant="h3" component="h3">
+            <Typography variant="h3">
                 Welcome To Task Manager
             </Typography>
         </Container>

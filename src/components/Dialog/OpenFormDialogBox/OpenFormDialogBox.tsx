@@ -27,6 +27,7 @@ import Task from "../../../types/Task";
 import useActionHook from "../../../features/redux/taskHooks/useActionHook";
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {postNewTask} from "../../../service/taskAPI";
 
 const StyledTextField = styled(TextField)(({theme}) => ({
     variant: "outlined",
@@ -41,7 +42,7 @@ export const DialogTitleStyle: SxProps = {
     justifyContent: 'center'
 }
 
-export const DialogActionsStyle:SxProps = {
+export const DialogActionsStyle: SxProps = {
     display: 'flex',
     alignItems: 'center',
     textAlign: 'center',
@@ -67,7 +68,7 @@ const OpenFormDialogBox = () => {
     const [review, setReview] = useState("");
     const [timeSpent, setTimeSpent] = useState("");
 
-    const tasksCount = useSelector(selectItemCount);
+
     const openDialog = useSelector(openFormDialogBoxSelector);
 
     const dispatch = useDispatch();
@@ -116,9 +117,9 @@ const OpenFormDialogBox = () => {
         dispatch(closeFormDialogBox());
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const newTask: Task = {
-            id: (Number(tasksCount) + 1).toString(),
+            id: "",
             title: title,
             description: description,
             estimatedTime: estTime,
@@ -128,15 +129,17 @@ const OpenFormDialogBox = () => {
             timeSpent: isClosed ? timeSpent : undefined,
             endTime: (isClosed || isUrgent) ? endTime?.toISOString() : undefined,
         };
-
-        addTaskToStore(newTask);
-
-        toast.success('TaskItem added successfully !', {
-            position: toast.POSITION.TOP_RIGHT
-        });
+        try {
+            const response = await postNewTask(newTask);
+            addTaskToStore(response);
+            toast.success('TaskItem added successfully !', {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        } catch (error) {
+            console.error(error);
+        }
 
     };
-
 
 
     return (
@@ -225,7 +228,7 @@ const OpenFormDialogBox = () => {
                 </DialogContent>
 
                 <DialogActions sx={{
-                   ...DialogActionsStyle
+                    ...DialogActionsStyle
                 }}>
                     <Button onClick={handleSubmit}
                             sx={{background: "#228B22", color: "white"}}>Add

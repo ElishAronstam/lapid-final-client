@@ -1,5 +1,5 @@
-import React from 'react';
-import {Provider} from 'react-redux';
+import React, {useEffect} from 'react';
+import {Provider, useDispatch} from 'react-redux';
 import {myStore} from "./store";
 import Header from "../components/Header/Header";
 import Search from "../components/MenuBar/Search/Search";
@@ -19,6 +19,8 @@ const containerStyles = {
 };
 
 function App() {
+
+
     return (
         <Provider store={myStore}>
             <Container

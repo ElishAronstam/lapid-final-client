@@ -39,7 +39,7 @@ const QuickFilters = () => {
 
 
     const handleFilters = (param: string) => {
-        dispatch(toggleFilter(toggleFilterAction(param))); // Goes to task slice
+        dispatch(toggleFilter(toggleFilterAction(param)));
     }
 
     const [statusSelected, setStatusSelected] = useState(false);

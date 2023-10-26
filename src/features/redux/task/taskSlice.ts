@@ -1,11 +1,11 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {getInitTasks} from "./helper";
+
 import Task from "../../../types/Task";
 
 export const taskSlice = createSlice({
     name: 'tasks',
     initialState: {
-        tasks: getInitTasks(),
+        tasks:Array<Task>(),
         currentTaskId: "",
         taskIdToDelete:"",
         openFormDialogBox: false,
@@ -23,7 +23,7 @@ export const taskSlice = createSlice({
             )
         },
 
-        setTasks: (state, action: PayloadAction<Task[]>) => {
+        setTasks: (state, action:PayloadAction<Array<Task>>) => {
             state.tasks = action.payload;
         },
 

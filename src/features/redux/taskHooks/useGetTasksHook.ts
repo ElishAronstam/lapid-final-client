@@ -1,11 +1,25 @@
 import Task from "../../../types/Task";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {selectTasks} from "../task/taskSelectors";
+import {useEffect, useState} from "react";
+import {fetchData} from "../../../service/taskAPI";
+import {setTasks} from "../task/taskSlice";
 
 const useGetTasksHook = () => {
-    const tasks: Array<Task> = useSelector(selectTasks);
 
-    return tasks;
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        async function fetchDataAndUseData() {
+            try {
+                const data = await fetchData();
+                return data
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        fetchDataAndUseData().then(data =>  dispatch(setTasks(data)));
+    },[dispatch])
 };
 
 export default useGetTasksHook;

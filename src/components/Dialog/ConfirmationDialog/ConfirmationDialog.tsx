@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {openConfirmationDialogBoxSelector, selectTaskToDelete} from "../../../features/redux/task/taskSelectors";
 import {closeConfirmationDialogBox, updateTaskIdToDelete} from "../../../features/redux/task/taskSlice";
 import useActionHook from "../../../features/redux/taskHooks/useActionHook";
+import {deleteTask} from "../../../service/taskAPI";
 
 const ConfirmationDialog = () => {
     const openDialog = useSelector(openConfirmationDialogBoxSelector);
@@ -18,10 +19,16 @@ const ConfirmationDialog = () => {
         dispatch(updateTaskIdToDelete(""));
     };
 
-    const handleConfirmed = () => {
+    const handleConfirmed = async() => {
         if (task) {
-            deleteTaskFromStore(task.id);
-            dispatch(closeConfirmationDialogBox);
+            try {
+                const response=await deleteTask(task.id);
+                console.log(response);
+                deleteTaskFromStore(task.id);
+                dispatch(closeConfirmationDialogBox);
+            } catch (error) {
+                console.error(error);
+            }
         }
     };
 
