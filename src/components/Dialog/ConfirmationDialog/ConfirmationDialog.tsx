@@ -23,7 +23,6 @@ const ConfirmationDialog = () => {
         if (task) {
             try {
                 const response=await deleteTask(task.id);
-                console.log(response);
                 deleteTaskFromStore(task.id);
                 dispatch(closeConfirmationDialogBox);
             } catch (error) {
