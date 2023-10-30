@@ -27,7 +27,7 @@ function App() {
                 sx={containerStyles}
             >
                 {/*Main Components*/}
-                {/*<Header/>*/}
+                <Header/>
                 {/*<Search/>*/}
                 {/*<QuickFilters/>*/}
                 <TasksTableContainer/>

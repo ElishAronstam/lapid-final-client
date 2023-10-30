@@ -6,17 +6,15 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectItemCount, selectTasks} from "../../../features/redux/task/taskSelectors";
 import Task from "../../../types/Task";
 import TaskItem from "../../TaskItem/TaskItem";
-import {setTasks} from "../../../features/redux/task/taskSlice";
 
 
 const TasksTableContainer = () => {
 
     const dispatch = useDispatch();
 
+    useGetTasksHook();
     const tasksCount = useSelector(selectItemCount);
     const titles = ["Type", "Priority", "Title", "Description", "Estimated Time", "End Time", "Review", "Status", "Time Spent", "Actions"];
-
-     useGetTasksHook();
     const tasks=useSelector(selectTasks);
 
     return (<>

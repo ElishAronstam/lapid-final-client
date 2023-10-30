@@ -1,15 +1,18 @@
 import axios from 'axios';
 import Task from "../types/Task";
+import { useQuery } from '@apollo/client';
+import { ALL_TASKS } from '../graphql/task';
 
-export const fetchData = async () => {
-    try {
-        const response = await axios.get('http://localhost:8000/tasks');
-        return response.data;
-    } catch (error) {
-        return [];
-    }
+// export const fetchData = async () => {
+//     try {
+//         const response = await axios.get('http://localhost:8000/tasks');
+//         return response.data;
+//     } catch (error) {
+//         return [];
+//     }
+//
+// }
 
-}
 
 export const postNewTask = async (taskData: Task) => {
     try {
