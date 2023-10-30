@@ -2,21 +2,18 @@
 import TasksTableHead from "../TasksTableHead/TasksTableHead";
 import {Paper, SxProps, Table, TableBody, TableContainer, Typography, TypographyVariant} from "@mui/material";
 import useGetTasksHook from "../../../features/redux/taskHooks/useGetTasksHook";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {selectItemCount, selectTasks} from "../../../features/redux/task/taskSelectors";
 import Task from "../../../types/Task";
 import TaskItem from "../../TaskItem/TaskItem";
-import {setTasks} from "../../../features/redux/task/taskSlice";
 
 
 const TasksTableContainer = () => {
 
-    const dispatch = useDispatch();
-
     const tasksCount = useSelector(selectItemCount);
     const titles = ["Type", "Priority", "Title", "Description", "Estimated Time", "End Time", "Review", "Status", "Time Spent", "Actions"];
 
-     useGetTasksHook();
+    useGetTasksHook();
     const tasks=useSelector(selectTasks);
 
     return (<>

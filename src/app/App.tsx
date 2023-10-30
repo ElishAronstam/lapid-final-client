@@ -20,7 +20,6 @@ const containerStyles = {
 
 function App() {
 
-
     return (
         <Provider store={myStore}>
             <Container

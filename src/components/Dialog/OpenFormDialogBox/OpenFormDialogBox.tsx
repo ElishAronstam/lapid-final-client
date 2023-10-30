@@ -129,15 +129,15 @@ const OpenFormDialogBox = () => {
             timeSpent: isClosed ? timeSpent : undefined,
             endTime: (isClosed || isUrgent) ? endTime?.toISOString() : undefined,
         };
-        try {
-            const response = await postNewTask(newTask);
-            addTaskToStore(response);
-            toast.success('TaskItem added successfully !', {
-                position: toast.POSITION.TOP_RIGHT
-            });
-        } catch (error) {
-            console.error(error);
-        }
+        // try {
+        //     const response = await postNewTask(newTask);
+        //     addTaskToStore(response);
+        //     toast.success('TaskItem added successfully !', {
+        //         position: toast.POSITION.TOP_RIGHT
+        //     });
+        // } catch (error) {
+        //     console.error(error);
+        // }
 
     };
 
