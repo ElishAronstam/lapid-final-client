@@ -27,16 +27,16 @@ function App() {
                 sx={containerStyles}
             >
                 {/*Main Components*/}
-                <Header/>
-                <Search/>
-                <QuickFilters/>
+                {/*<Header/>*/}
+                {/*<Search/>*/}
+                {/*<QuickFilters/>*/}
                 <TasksTableContainer/>
-                <AddButton/>
+                {/*<AddButton/>*/}
 
                 {/* Prompted Components*/}
-                <OpenFormDialogBox/>
-                <OpenReadDialogBox/>
-                <ConfirmationDialog/>
+                {/*<OpenFormDialogBox/>*/}
+                {/*<OpenReadDialogBox/>*/}
+                {/*<ConfirmationDialog/>*/}
             </Container>
         </Provider>
     );
