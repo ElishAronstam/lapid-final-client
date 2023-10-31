@@ -1,8 +1,6 @@
-import Task from "../../../types/Task";
-import {useDispatch, useSelector} from "react-redux";
-import {selectTasks} from "../task/taskSelectors";
-import {useEffect, useState} from "react";
-import {fetchData} from "../../../service/taskAPI";
+import {useDispatch} from "react-redux";
+import {useEffect} from "react";
+import {fetchData} from "../../../taskAPI/taskAPI";
 import {setTasks} from "../task/taskSlice";
 
 
