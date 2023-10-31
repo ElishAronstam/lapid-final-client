@@ -17,7 +17,7 @@ import {
 
 import React, {useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
-import {openFormDialogBoxSelector, selectItemCount,} from '../../../features/redux/task/taskSelectors'
+import {openFormDialogBoxSelector} from '../../../features/redux/task/taskSelectors'
 import {closeFormDialogBox} from "../../../features/redux/task/taskSlice"
 import {DesktopDateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import dayjs, {Dayjs} from 'dayjs';
@@ -129,15 +129,15 @@ const OpenFormDialogBox = () => {
             timeSpent: isClosed ? timeSpent : undefined,
             endTime: (isClosed || isUrgent) ? endTime?.toISOString() : undefined,
         };
-        // try {
-        //     const response = await postNewTask(newTask);
-        //     addTaskToStore(response);
-        //     toast.success('TaskItem added successfully !', {
-        //         position: toast.POSITION.TOP_RIGHT
-        //     });
-        // } catch (error) {
-        //     console.error(error);
-        // }
+        try {
+            const response = await postNewTask(newTask);
+            addTaskToStore(response);
+            toast.success('TaskItem added successfully !', {
+                position: toast.POSITION.TOP_RIGHT
+            });
+        } catch (error) {
+            console.error(error);
+        }
 
     };
 
