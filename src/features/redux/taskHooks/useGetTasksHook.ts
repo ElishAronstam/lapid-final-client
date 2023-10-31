@@ -11,7 +11,7 @@ const useGetTasksHook = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        async function fetchDataAndUseData() {
+        async function returnData() {
             try {
                 const data = await fetchData();
                 return data
@@ -19,7 +19,7 @@ const useGetTasksHook = () => {
                 console.error(error);
             }
         }
-        fetchDataAndUseData().then(data =>  dispatch(setTasks(data)));
+        returnData().then(data =>  dispatch(setTasks(data)));
     },[dispatch])
 };
 
