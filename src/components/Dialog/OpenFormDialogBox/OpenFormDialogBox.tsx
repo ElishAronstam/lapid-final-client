@@ -28,6 +28,8 @@ import useActionHook from "../../../features/redux/taskHooks/useActionHook";
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {postNewTask} from "../../../service/taskAPI";
+import { CREATE_TASK } from '../../../graphql/task';
+import { useMutation } from '@apollo/client';
 
 const StyledTextField = styled(TextField)(({theme}) => ({
     variant: "outlined",
@@ -118,21 +120,21 @@ const OpenFormDialogBox = () => {
     };
 
     const handleSubmit = async () => {
-        const newTask: Task = {
-            id: "",
-            title: title,
-            description: description,
-            estimatedTime: estTime,
-            status: status,
-            priority: priority,
-            review: isClosed ? review : undefined,
-            timeSpent: isClosed ? timeSpent : undefined,
-            endTime: (isClosed || isUrgent) ? endTime?.toISOString() : undefined,
-        };
+        // const newTask: Task = {
+        //     id: "",
+        //     title: title,
+        //     description: description,
+        //     estimatedTime: estTime,
+        //     status: status,
+        //     priority: priority,
+        //     review: isClosed ? review : undefined,
+        //     timeSpent: isClosed ? timeSpent : undefined,
+        //     endTime: (isClosed || isUrgent) ? endTime?.toISOString() : undefined,
+        // };
         try {
-            const response = await postNewTask(newTask);
-            addTaskToStore(response);
-            toast.success('TaskItem added successfully !', {
+            const result = await createTaskMutation();
+            addTaskToStore(result.data.createTask);
+            toast.success('Task added successfully !', {
                 position: toast.POSITION.TOP_RIGHT
             });
         } catch (error) {
@@ -141,6 +143,18 @@ const OpenFormDialogBox = () => {
 
     };
 
+    const [createTaskMutation] = useMutation(CREATE_TASK, {
+        variables: {
+            title: title,
+            description: description,
+            estimatedTime: estTime,
+            status: status,
+            priority: priority,
+            review: isClosed ? review : undefined,
+            timeSpent: isClosed ? timeSpent : undefined,
+            endTime: (isClosed || isUrgent) ? endTime?.toISOString() : undefined,
+        },
+    });
 
     return (
         <Container>

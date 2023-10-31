@@ -4,6 +4,8 @@ import {openConfirmationDialogBoxSelector, selectTaskToDelete} from "../../../fe
 import {closeConfirmationDialogBox, updateTaskIdToDelete} from "../../../features/redux/task/taskSlice";
 import useActionHook from "../../../features/redux/taskHooks/useActionHook";
 import {deleteTask} from "../../../service/taskAPI";
+import { useMutation } from '@apollo/client';
+import { DELETE_TASK } from '../../../graphql/task';
 
 const ConfirmationDialog = () => {
     const openDialog = useSelector(openConfirmationDialogBoxSelector);
@@ -22,8 +24,8 @@ const ConfirmationDialog = () => {
     const handleConfirmed = async() => {
         if (task) {
             try {
-                const response=await deleteTask(task.id);
-                console.log(response);
+                const response=await deleteTaskMutation();
+                console.log(response.data.deleteTask);
                 deleteTaskFromStore(task.id);
                 dispatch(closeConfirmationDialogBox);
             } catch (error) {
@@ -31,6 +33,13 @@ const ConfirmationDialog = () => {
             }
         }
     };
+
+    const [deleteTaskMutation] = useMutation(DELETE_TASK,{
+        variables: {
+            taskId: task?task.id:undefined,
+          }
+    });
+
 
     return (<Container>
         {task && <Dialog open={openDialog} onClose={handleCloseDialog}>
