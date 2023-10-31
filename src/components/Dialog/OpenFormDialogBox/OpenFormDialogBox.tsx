@@ -18,7 +18,7 @@ import {
 import React, {useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import {openFormDialogBoxSelector, selectItemCount,} from '../../../features/redux/task/taskSelectors'
-import {closeFormDialogBox} from "../../../features/redux/task/taskSlice"
+import {closeConfirmationDialogBox, closeFormDialogBox} from "../../../features/redux/task/taskSlice"
 import {DesktopDateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import dayjs, {Dayjs} from 'dayjs';
 import utc from "dayjs/plugin/utc";
@@ -120,23 +120,15 @@ const OpenFormDialogBox = () => {
     };
 
     const handleSubmit = async () => {
-        // const newTask: Task = {
-        //     id: "",
-        //     title: title,
-        //     description: description,
-        //     estimatedTime: estTime,
-        //     status: status,
-        //     priority: priority,
-        //     review: isClosed ? review : undefined,
-        //     timeSpent: isClosed ? timeSpent : undefined,
-        //     endTime: (isClosed || isUrgent) ? endTime?.toISOString() : undefined,
-        // };
         try {
             const result = await createTaskMutation();
-            addTaskToStore(result.data.createTask);
-            toast.success('Task added successfully !', {
-                position: toast.POSITION.TOP_RIGHT
-            });
+            if(result.data.createTask) {
+                addTaskToStore(result.data.createTask);
+                toast.success('Task added successfully !', {
+                    position: toast.POSITION.TOP_RIGHT
+                });
+            }
+            dispatch(closeFormDialogBox());
         } catch (error) {
             console.error(error);
         }

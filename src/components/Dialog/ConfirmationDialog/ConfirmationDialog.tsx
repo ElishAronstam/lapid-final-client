@@ -25,8 +25,10 @@ const ConfirmationDialog = () => {
         if (task) {
             try {
                 const response=await deleteTaskMutation();
-                console.log(response.data.deleteTask);
-                deleteTaskFromStore(task.id);
+                if (response.data.deleteTask === 'Task deleted') {
+                    deleteTaskFromStore(task.id);
+                }
+
                 dispatch(closeConfirmationDialogBox);
             } catch (error) {
                 console.error(error);

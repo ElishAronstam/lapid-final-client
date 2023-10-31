@@ -28,8 +28,8 @@ function App() {
             >
                 {/*Main Components*/}
                 <Header/>
-                {/*<Search/>*/}
-                {/*<QuickFilters/>*/}
+                <Search/>
+                <QuickFilters/>
                 <TasksTableContainer/>
                 <AddButton/>
 

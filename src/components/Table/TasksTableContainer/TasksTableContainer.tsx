@@ -6,6 +6,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectItemCount, selectTasks} from "../../../features/redux/task/taskSelectors";
 import Task from "../../../types/Task";
 import TaskItem from "../../TaskItem/TaskItem";
+import {client} from "../../../index";
+import {FILTER_TASKS} from "../../../graphql/task";
 
 
 const TasksTableContainer = () => {

@@ -60,13 +60,13 @@ export const DELETE_TASK=gql`
   `;
 
 export const FILTER_TASKS = gql`
-  query filterTasks(
+  query FilterTasks(
      $statusFilter:Boolean
      $priorityFilter:Boolean
      $searchWord:String
   ) {
     filterTasks(
-      TasksFiltersInput: {
+      filters: {
           statusFilter:$statusFilter
           priorityFilter:$priorityFilter
           searchWord:$searchWord
