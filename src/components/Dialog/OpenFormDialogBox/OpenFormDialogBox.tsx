@@ -27,7 +27,6 @@ import Task from "../../../types/Task";
 import useActionHook from "../../../features/redux/taskHooks/useActionHook";
 import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {postNewTask} from "../../../service/taskAPI";
 import { CREATE_TASK } from '../../../graphql/task';
 import { useMutation } from '@apollo/client';
 
@@ -122,17 +121,14 @@ const OpenFormDialogBox = () => {
     const handleSubmit = async () => {
         try {
             const result = await createTaskMutation();
-            if(result.data.createTask) {
-                addTaskToStore(result.data.createTask);
-                toast.success('Task added successfully !', {
-                    position: toast.POSITION.TOP_RIGHT
-                });
-            }
+            addTaskToStore(result.data.createTask);
+            toast.success('Task added successfully !', {
+                position: toast.POSITION.TOP_RIGHT
+            });
             dispatch(closeFormDialogBox());
         } catch (error) {
             console.error(error);
         }
-
     };
 
     const [createTaskMutation] = useMutation(CREATE_TASK, {

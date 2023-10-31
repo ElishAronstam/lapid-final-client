@@ -41,6 +41,6 @@ export const filterTasks = async (filterByOpenStatus: boolean, filterByHighPrior
         return response.data;
     } catch (error) {
         console.error(error);
-        throw error; // Rethrow the error for handling in the component, if needed
+        throw error;
     }
 };

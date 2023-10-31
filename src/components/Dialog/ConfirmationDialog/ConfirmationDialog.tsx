@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {openConfirmationDialogBoxSelector, selectTaskToDelete} from "../../../features/redux/task/taskSelectors";
 import {closeConfirmationDialogBox, updateTaskIdToDelete} from "../../../features/redux/task/taskSlice";
 import useActionHook from "../../../features/redux/taskHooks/useActionHook";
-import {deleteTask} from "../../../service/taskAPI";
 import { useMutation } from '@apollo/client';
 import { DELETE_TASK } from '../../../graphql/task';
 
@@ -25,10 +24,7 @@ const ConfirmationDialog = () => {
         if (task) {
             try {
                 const response=await deleteTaskMutation();
-                if (response.data.deleteTask === 'Task deleted') {
-                    deleteTaskFromStore(task.id);
-                }
-
+                deleteTaskFromStore(task.id);
                 dispatch(closeConfirmationDialogBox);
             } catch (error) {
                 console.error(error);
